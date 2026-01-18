@@ -1,0 +1,16 @@
+/*
+Theme Name: Miescape
+Theme URI: 
+Author: 
+Author URI: 
+Description: Custom WordPress theme for Miescape
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: miescape
+*/
+
+/* Base styles - additional custom CSS can be added here */
+html{
+    margin-top: 0 !important;
+}
