@@ -1,198 +1,149 @@
 <?php
 get_header();
-$lang = pll_current_language();
+$post_title = get_the_title();
+$post_image = get_field('announce_img');
+$post_date = get_the_date('Y.m.d');
+$post_content = get_field('announce_desc');
+$post_categories = get_the_terms(get_the_ID(), 'announcement_category');
 ?>
 
-<section class="relative bg-[linear-gradient(180deg,#051C2A_29%,#013538_63%,#025140_100%)]">
+<section
+  id="hero-section"
+  class="w-full h-[400px] md:h-[360px] lg:h-[500px] xl:h-[530px] bg-gradient-to-b from-[#A4D3E8] to-[#28A8E0] flex items-center justify-center">
+  <div
+    class="mx-auto flex flex-col items-center justify-center w-full mt-14 md:mt-16 lg:mt-28 xl:mt-32">
     <div
-        class="z-50 flex md:flex-col justify-between items-center md:items-start gap-6 fixed top-[30px] md:top-[80px] lg:top-[100px]
-             xl:top-[115px] left-[40px] md:left-[60px] lg:left-[100px] xl:left-[140px] md:max-w-[116.67px] md:h-[280px] lg:h-[300px] xl:h-[420px] max-h-[420px]">
-        <div id="hamburgerBtn"
-            class="relative flex md:hidden flex-col text-white justify-between w-[30px] h-[20px]">
-            <div class="h-[1px] w-full bg-white"></div>
-            <div class="h-[1px] w-full bg-white"></div>
-            <div class="h-[1px] w-full bg-white"></div>
-        </div>
-        <div class="relative md:mb-4 z-10 select-none">
-            <div
-                class="relative group w-[48px] lg:w-[52px] xl:w-[58px] text-[11.87px] lg:text-[12.87px] xl:text-[14.87px]">
-                <button
-                    class="w-[48px] lg:w-[52px] xl:w-[58px] h-[28.21px] lg:h-[30.21px] xl:h-[34.21px] flex items-center justify-center bg-[#CDD3D6] text-[#0B1828] z-10 hover:bg-white hover:underline hover:underline-offset-[6px] hover:decoration-[#0B1828] focus:outline-none">
-                    <?php echo $lang === 'ja' ? '日本語' : ($lang === 'zh' ? '繁體字' : 'English'); ?>
-                </button>
-                <div
-                    class="langMenuList flex flex-col w-[48px] lg:w-[52px] xl:w-[58px] absolute left-0 top-[28.21px] lg:top-[30.21px] xl:top-[34.21px] opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition-opacity duration-200 z-20">
-                    <a href="<?php echo get_permalink(pll_get_post(get_the_ID(), $lang == 'ja' ? 'en' : ($lang == 'zh' ? 'ja' : 'ja'))); ?>"
-                        class=" w-[48px] lg:w-[52px] xl:w-[58px] h-[28.21px] lg:h-[30.21px] xl:h-[34.21px] flex items-center justify-center bg-[#CDD3D6] text-[#0B1828] transition hover:bg-white hover:underline hover:underline-offset-[6px] hover:decoration-[#0B1828]">
-                        <?php echo $lang === 'ja' ? 'English' : ($lang === 'zh' ? '日本語' : '日本語'); ?>
-                    </a>
-                    <a href="<?php echo get_permalink(pll_get_post(get_the_ID(), $lang == 'ja' ? 'zh' : ($lang == 'zh' ? 'en' : 'zh'))); ?>"
-                        class=" w-[48px] lg:w-[52px] xl:w-[58px] h-[28.21px] lg:h-[30.21px] xl:h-[34.21px] flex items-center justify-center bg-[#CDD3D6] text-[#0B1828] transition hover:bg-white hover:underline hover:underline-offset-[6px] hover:decoration-[#0B1828]">
-                        <?php echo $lang === 'ja' ? '繁體字' : ($lang === 'zh' ? 'English' : '繁體字'); ?>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div
-            class="hidden md:flex flex-col hidden justify-between h-[180px] lg:h-[200px] xl:h-[250px] text-white text-[9px] sm:text-[12px] md:text-[16px] lg:text-[18px] xl:text-[20px] text-left leading-[1.8]  ">
-            <?php
-            if ($lang === 'ja') {
-                $base = '/';
-            } elseif ($lang === 'en') {
-                $base = '/en/';
-            } elseif ($lang === 'zh') {
-                $base = '/zh/';
-            } else {
-                $base = '/';
-            }
-            ?>
-            <a href="<?php echo esc_url(home_url($base)); ?>" class="font-garamond hover:opacity-60 transition-opacity duration-200">Top</a>
-            <a href="<?php echo esc_url(home_url($base . 'plan' . ($lang === 'ja' ? '' : '-' . $lang))); ?>"><span class="font-garamond hover:opacity-60 transition-opacity duration-200">Experiences</span></a>
-            <a href="<?php echo esc_url(home_url($base . 'tour' . ($lang === 'ja' ? '' : '-' . $lang))); ?>"><span class="font-garamond hover:opacity-60 transition-opacity duration-200">Tour</span></a>
-            <a href="<?php echo esc_url(home_url($base . 'about' . ($lang === 'ja' ? '' : '-' . $lang))); ?>"><span class="font-garamond hover:opacity-60 transition-opacity duration-200">About</span></a>
-        </div>
-
+      class="text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] text-white font-medium mb-2">
+      Blog
     </div>
-    <div class="flex flex-col items-center justify-center justify-center w-full h-full px-8 gap">
-        <div
-            class="flex flex-col gap-12 md:gap-6 lg:gap-8 xl:gap-12 w-full md:w-[350px] lg:w-[450px] xl:w-[600px] max-w-[600px] mx-auto py-28 md:pt-32 md:pb-12 lg:pt-40 xl:py-40">
-            <div
-                class="text-white/70 opacity-80 text-[10px] md:text-[12px] lg:text-[15px] xl:text-[17px] leading-[2]">
-                <a class="hover:text-white transition-colors duration-200" href="<?php echo esc_url(home_url('/' . $lang === 'ja' ? '' : $lang)); ?>">TOP </a> &nbsp; > &nbsp;
-                <?php
-                if ($lang === 'ja') {
-                    $plan_url = home_url('/plan');
-                    $plan_label = 'Experiences';
-                } elseif ($lang === 'en') {
-                    $plan_url = home_url('/en/plan-en');
-                    $plan_label = 'Experiences';
-                } elseif ($lang === 'zh') {
-                    $plan_url = home_url('/zh/plan-zh');
-                    $plan_label = 'Experiences';
-                } else {
-                    $plan_url = home_url('/plan');
-                    $plan_label = 'Experiences';
-                }
-                ?>
-                <a class="hover:text-white transition-colors duration-200" href="<?php echo esc_url($plan_url); ?>"><?php echo $plan_label; ?></a>
-                &nbsp; > &nbsp;
-                <?php if (get_field('title')): ?>
-                    <a class="hover:text-white transition-colors duration-200">
-                        <?php echo nl2br(esc_html(get_field('title'))); ?>
-                    </a>
-                <?php endif; ?>
-            </div>
-            <div class="flex flex-col gap-3 md:gap-3 lg:gap-4 xl:gap-5 pb-8 md:pb-12 lg:pb-16 xl:pb-24">
-                <?php if (get_field('title')): ?>
-                    <h1 class="text-white text-[32px] md:text-[28px] lg:text-[32px] xl:text-[48px] leading-[1.2]">
-                        <?php echo nl2br(esc_html(get_field('title'))); ?>
-                    </h1>
-                <?php endif; ?>
-                <hr class="w-full border-white">
-                <h3
-                    class="text-white text-[16px] md:text-[15px] xl:text-[17px] opacity-70 tracking-wider text-right">
-                    2025.11.01
-                </h3>
-            </div>
-            <div
-                <?php
-                $content = get_field('gallery');
-
-                // Extract all image URLs from WYSIWYG content
-                $image_urls = [];
-
-                if ($content) {
-                    $dom = new DOMDocument();
-                    libxml_use_internal_errors(true); // Prevent HTML warnings
-                    $dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
-                    libxml_clear_errors();
-
-                    $imgs = $dom->getElementsByTagName('img');
-
-                    foreach ($imgs as $img) {
-                        $image_urls[] = $img->getAttribute('src');
-                    }
-                }
-                ?>
-                class="w-full flex flex-col gap-5 overflow-hidden pb-4 md:pb-6 lg:pb-8 xl:pb-12 experiences-swiper-container">
-                <div class="relative swiper-container experiences-swiper">
-                    <?php if (!empty($image_urls)): ?>
-                        <div class="swiper-wrapper aspect-[1.5] object-cover">
-                            <?php foreach ($image_urls as $url): ?>
-                                <div class="swiper-slide">
-                                    <img loading="lazy" src="<?php echo esc_url($url); ?>" alt="" class="w-full h-full">
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif; ?>
-                </div>
-                <div class="relative w-full flex h-10"
-                    style="--swiper-navigation-color: #C4B28C; --swiper-pagination-color: #C4B28C">
-                    <div class="swiper-pagination"></div>
-                </div>
-                <div thumbsSlider="" class="w-full max-h-[385px] swiper-container experiences-thumbs-swiper">
-                    <?php if (!empty($image_urls)): ?>
-                        <div class="swiper-wrapper">
-                            <?php foreach ($image_urls as $url): ?>
-                                <div class="swiper-slide aspect-[1.5] object-cover">
-                                    <img loading="lazy" src="<?php echo esc_url($url); ?>" alt="" class="w-full h-full">
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <div class="flex flex-col w-full text-white add gap-3 md:gap-6 lg:gap-8 xl:gap-10">
-                <?php if (get_field('description')): ?>
-                    <p class="text-[12px] md:text-[13px] lg:text-[15px] xl:text-[17px] leading-[2]">
-                        <?php echo nl2br(esc_html(get_field('description'))); ?>
-                    </p>
-                <?php endif; ?>
-            </div>
-        </div>
-        <div
-            class="w-full md:w-[450px] lg:w-[600px] xl:w-[870px] max-w-[870px] flex flex-col items-center gap-12 md:gap-10 lg:gap-14 xl:gap-20 py-20 md:py-40 lg:py-52 xl:py-64">
-            <div
-                class="grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-12 lg:gap-x-8 lg:gap-y-12 xl:gap-x-10 xl:gap-y-16 md:gap-y-8">
-                <?php
-                $args = array(
-                    'post_type' => 'announcement',
-                    'posts_per_page' => -1, // all
-                    'orderby' => 'date',
-                    // 'post__not_in'   => array(get_the_ID()), // except for current
-                    'order' => 'DESC',
-                );
-
-                $announcements = new WP_Query($args);
-
-                if ($announcements->have_posts()) :
-                    while ($announcements->have_posts()) : $announcements->the_post();
-                        // Fetch gallery images array (returns array of images, get only the first)
-                        $gallery_img_url = '';
-                        $gallery_content = get_field('gallery');
-                        $gallery_img_url = get_first_image_from_content($gallery_content);
-                ?>
-                        <a href="<?php the_permalink(); ?>">
-                            <div class="flex flex-col gap-2 lg:gap-4 xl:gap-6 col-span-1 relative group cursor-pointer">
-                                <div class="w-full relative">
-                                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300"></div>
-                                    <img loading="lazy" src="<?php echo esc_url($gallery_img_url); ?>" alt="<?php the_title_attribute(); ?>" class="w-full aspect-[8/5] object-cover">
-                                </div>
-                                <div class="bg-transparent">
-                                    <p class="text-[12px] md:text-[15px] lg:text-[17px] xl:text-[20px] text-white leading-[2]">
-                                        <?php the_title(); ?>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                <?php
-                    endwhile;
-                endif;
-                wp_reset_postdata();
-                ?>
-            </div>
-        </div>
+    <h2
+      class="text-[30px] md:text-[36px] lg:text-[40px] xl:text-[50px] text-white font-medium mb-3">
+      お知らせ
+    </h2>
+    <div
+      class="max-w-[280px] md:max-w-full text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] text-white font-medium text-start md:text-center leading-6">
+      「自分らしく、心身ともに健やかに、 社会とつながりながら心地よく生<br />きられている状態」
+      それがウェルビーイングです。
     </div>
+  </div>
 </section>
+<section
+  class="w-full max-w-[1200px] mx-auto justify-center items-center px-4 md:px-8 lg:px-12 xl:px-16">
+  <div
+    class="text-[10px] md:text-[11px] lg:text-[13px] xl:text-[14px] text-black pt-4 md:pt-5 lg:pt-7 xl:pt-8">
+    <a
+      href="<?php echo home_url(); ?>"
+      class="hover:text-[#28A8E0] hover:underline underline-offset-2 cursor-pointer select-none transition-colors duration-200">株式会社ウエルフォース</a>
+    / <a href="<?php echo home_url('/announcement'); ?>" class="hover:text-[#28A8E0] hover:underline underline-offset-2 cursor-pointer select-none transition-colors duration-200">お知らせ</a> / <?php echo $post_title; ?>
+  </div>
+</section>
+
+<section
+  class="w-full flex justify-center items-center pt-14 pb-20 md:pt-20 md:pb-24 lg:py-28 xl:py-32 bg-[#fff] md:px-20 px-8">
+  <div
+    class="w-full max-w-[600px] md:max-w-[680px] lg:max-w-[800px] xl:max-w-[1220px] mx-auto flex flex-col justify-center items-center gap-4 md:gap-6 lg:gap-8">
+    <div class="w-full px-0 md:px-4 lg:px-16">
+      <div class="flex gap-3">
+        <span
+          class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular"><?php echo $post_date; ?></span>
+        <span
+          class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular"><?php echo $post_categories[0]->name; ?></span>
+      </div>
+    </div>
+    <div
+      class="w-full flex flex-col lg:flex-row gap-8 md:gap-16 lg:gap-12 xl:gap-[90px]">
+      <div
+        class="w-full lg:w-[62%] flex flex-col gap-8 md:gap-12 lg:gap-20">
+        <img
+          src="<?php echo esc_url($post_image); ?>"
+          alt="お知らせ1"
+          class="w-full aspect-[1.5] object-cover rounded-[20px]" />
+        <p
+          class="text-[14px] md:text-[16px] lg:text-[14px] xl:text-[16px] leading-[2.2]">
+          <?php echo $post_content; ?>
+        </p>
+      </div>
+
+      <div class="w-full lg:w-[38%] flex flex-col gap-3 xl:gap-4">
+        <div
+          class="w-full flex gap-2 gap-8 lg:gap-4 xl:gap-6 bg-[#F5FCFF] rounded-[20px] p-3 md:py-4 md:px-5 lg:px-4 xl:py-5 xl:px-7">
+          <div class="w-[35%] md:w-[20%] lg:w-[35%]">
+            <img
+              src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/blog01.webp'); ?>"
+              alt="お知らせ1"
+              class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px]" />
+          </div>
+          <div
+            class="w-[65%] md:w-[80%] lg:w-[65%] flex flex-col gap-2 md:gap-4 lg:gap-2 xl:gap-3">
+            <div class="flex gap-3">
+              <span
+                class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular">2025.1.10</span>
+              <span
+                class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular">地域情報</span>
+            </div>
+            <p
+              class="text-[14px] md:text-[14px] lg:text-[12px] xl:text-[16px] leading-relaxed xl:leading-[2] line-clamp-2">
+              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
+              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
+              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
+              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
+            </p>
+          </div>
+        </div>
+        <div
+          class="w-full flex gap-2 gap-8 lg:gap-4 xl:gap-6 bg-[#F5FCFF] rounded-[20px] p-3 md:py-4 md:px-5 lg:px-4 xl:py-5 xl:px-7">
+          <div class="w-[35%] md:w-[20%] lg:w-[35%]">
+            <img
+              src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/blog01.webp'); ?>"
+              alt="お知らせ1"
+              class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px]" />
+          </div>
+          <div
+            class="w-[65%] md:w-[80%] lg:w-[65%] flex flex-col gap-2 md:gap-4 lg:gap-2 xl:gap-3">
+            <div class="flex gap-3">
+              <span
+                class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular">2025.1.10</span>
+              <span
+                class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular">地域情報</span>
+            </div>
+            <p
+              class="text-[14px] md:text-[14px] lg:text-[12px] xl:text-[16px] leading-relaxed xl:leading-[2] line-clamp-2">
+              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
+              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
+              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
+              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
+            </p>
+          </div>
+        </div>
+        <div
+          class="w-full flex gap-2 gap-8 lg:gap-4 xl:gap-6 bg-[#F5FCFF] rounded-[20px] p-3 md:py-4 md:px-5 lg:px-4 xl:py-5 xl:px-7">
+          <div class="w-[35%] md:w-[20%] lg:w-[35%]">
+            <img
+              src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/blog01.webp'); ?>"
+              alt="お知らせ1"
+              class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px]" />
+          </div>
+          <div
+            class="w-[65%] md:w-[80%] lg:w-[65%] flex flex-col gap-2 md:gap-4 lg:gap-2 xl:gap-3">
+            <div class="flex gap-3">
+              <span
+                class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular">2025.1.10</span>
+              <span
+                class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular">地域情報</span>
+            </div>
+            <p
+              class="text-[14px] md:text-[14px] lg:text-[12px] xl:text-[16px] leading-relaxed xl:leading-[2] line-clamp-2">
+              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
+              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
+              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
+              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <?php get_footer(); ?>
