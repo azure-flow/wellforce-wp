@@ -40,6 +40,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const header = document.querySelector("header");
   if (header) {
     function updateHeaderBackground() {
+      // Check if we're on front page or single news page
+      const isFrontPage = header.getAttribute("data-is-front-page") === "true";
+      const isSingleNews = header.getAttribute("data-is-single-news") === "true";
+      
+      // If on front page or single news page, always apply background color
+      if (isFrontPage || isSingleNews) {
+        header.classList.remove("bg-white", "bg-[#e2f5ff]", "hover:bg-[#e2f5ff]");
+        header.classList.add("bg-[#e2f5ffb3]");
+        return; // Exit early, don't apply scroll-based logic
+      }
+      
       let heroHeight;
       if (heroSection) {
         heroHeight = heroSection.offsetHeight;

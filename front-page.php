@@ -8,7 +8,7 @@ get_header();
         data-aos="fade-in"
         data-aos-delay="200">
         <img
-            src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/fv_top.webp' ); ?>"
+            src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/fv_top.webp'); ?>"
             alt="FV"
             class="absolute top-0 left-0 right-0 bottom-0 w-full h-full object-cover" />
     </div>
@@ -34,7 +34,7 @@ get_header();
                 向上に貢献する事業を展開しています。
             </div>
             <a
-                href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"
+                href="<?php echo esc_url(home_url('/contact/')); ?>"
                 class="flex items-center justify-center rounded-[20px] bg-[#28A8E0] hover:bg-[#5ec6f8] px-8 md:px-10 lg:px-12 xl:px-14 py-2 md:py-3 lg:py-4 xl:py-5 text-white font-bold text-[12px] md:text-[16px] transition-colors duration-150">
                 コンタクトを取る
                 <svg
@@ -72,7 +72,7 @@ get_header();
                         <div
                             class="w-[208px] md:w-full max-w-[300px] aspect-[2] bg-white rounded-[20px] rounded-[15px] border-[1px] border-gray-300 flex items-center justify-center overflow-hidden">
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand01.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand01.webp'); ?>"
                                 alt="marquee01"
                                 class="w-full object-cover" />
                         </div>
@@ -81,7 +81,7 @@ get_header();
                         <div
                             class="w-[208px] md:w-full max-w-[300px] aspect-[2] bg-white rounded-[20px] rounded-[15px] border-[1px] border-gray-300 flex items-center justify-center overflow-hidden">
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand02.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand02.webp'); ?>"
                                 alt="marquee02"
                                 class="w-full object-cover" />
                         </div>
@@ -90,7 +90,7 @@ get_header();
                         <div
                             class="w-[208px] md:w-full max-w-[300px] aspect-[2] bg-white rounded-[20px] rounded-[15px] border-[1px] border-gray-300 flex items-center justify-center overflow-hidden">
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand03.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand03.webp'); ?>"
                                 alt="marquee03"
                                 class="w-full object-cover" />
                         </div>
@@ -99,11 +99,11 @@ get_header();
                         <div
                             class="w-[208px] md:w-full max-w-[300px] aspect-[2] bg-white rounded-[20px] rounded-[15px] border-[1px] border-gray-300 flex items-center justify-center overflow-hidden">
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand04.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand04.webp'); ?>"
                                 alt="marquee04"
                                 class="w-full object-cover hidden md:block" />
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand01.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand01.webp'); ?>"
                                 alt="marquee04"
                                 class="w-full object-cover block md:hidden" />
                         </div>
@@ -112,11 +112,11 @@ get_header();
                         <div
                             class="w-[208px] md:w-full max-w-[300px] aspect-[2] bg-white rounded-[20px] rounded-[15px] border-[1px] border-gray-300 flex items-center justify-center overflow-hidden">
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand05.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand05.webp'); ?>"
                                 alt="marquee05"
                                 class="w-full object-cover hidden md:block" />
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand02.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand02.webp'); ?>"
                                 alt="marquee05"
                                 class="w-full object-cover block md:hidden" />
                         </div>
@@ -125,11 +125,11 @@ get_header();
                         <div
                             class="w-[208px] md:w-full max-w-[300px] aspect-[2] bg-white rounded-[20px] rounded-[15px] border-[1px] border-gray-300 flex items-center justify-center overflow-hidden">
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand06.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand06.webp'); ?>"
                                 alt="marquee06"
                                 class="w-full object-cover hidden md:block" />
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand03.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand03.webp'); ?>"
                                 alt="marquee06"
                                 class="w-full object-cover block md:hidden" />
                         </div>
@@ -138,7 +138,7 @@ get_header();
                         <div
                             class="w-[208px] md:w-full max-w-[300px] aspect-[2] bg-white rounded-[20px] rounded-[15px] border-[1px] border-gray-300 flex items-center justify-center overflow-hidden">
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand01.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand01.webp'); ?>"
                                 alt="marquee01"
                                 class="w-full object-cover" />
                         </div>
@@ -147,7 +147,7 @@ get_header();
                         <div
                             class="w-[208px] md:w-full max-w-[300px] aspect-[2] bg-white rounded-[20px] rounded-[15px] border-[1px] border-gray-300 flex items-center justify-center overflow-hidden">
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand02.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand02.webp'); ?>"
                                 alt="marquee02"
                                 class="w-full object-cover" />
                         </div>
@@ -156,7 +156,7 @@ get_header();
                         <div
                             class="w-[208px] md:w-full max-w-[300px] aspect-[2] bg-white rounded-[20px] rounded-[15px] border-[1px] border-gray-300 flex items-center justify-center overflow-hidden">
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand03.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand03.webp'); ?>"
                                 alt="marquee03"
                                 class="w-full object-cover" />
                         </div>
@@ -165,11 +165,11 @@ get_header();
                         <div
                             class="w-[208px] md:w-full max-w-[300px] aspect-[2] bg-white rounded-[20px] rounded-[15px] border-[1px] border-gray-300 flex items-center justify-center overflow-hidden">
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand04.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand04.webp'); ?>"
                                 alt="marquee04"
                                 class="w-full object-cover hidden md:block" />
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand01.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand01.webp'); ?>"
                                 alt="marquee04"
                                 class="w-full object-cover block md:hidden" />
                         </div>
@@ -178,11 +178,11 @@ get_header();
                         <div
                             class="w-[208px] md:w-full max-w-[300px] aspect-[2] bg-white rounded-[20px] rounded-[15px] border-[1px] border-gray-300 flex items-center justify-center overflow-hidden">
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand05.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand05.webp'); ?>"
                                 alt="marquee05"
                                 class="w-full object-cover hidden md:block" />
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand02.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand02.webp'); ?>"
                                 alt="marquee05"
                                 class="w-full object-cover block md:hidden" />
                         </div>
@@ -191,11 +191,11 @@ get_header();
                         <div
                             class="w-[208px] md:w-full max-w-[300px] aspect-[2] bg-white rounded-[20px] rounded-[15px] border-[1px] border-gray-300 flex items-center justify-center overflow-hidden">
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand06.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand06.webp'); ?>"
                                 alt="marquee06"
                                 class="w-full object-cover hidden md:block" />
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand03.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand03.webp'); ?>"
                                 alt="marquee06"
                                 class="w-full object-cover block md:hidden" />
                         </div>
@@ -208,7 +208,7 @@ get_header();
                         <div
                             class="w-[208px] md:w-full max-w-[300px] aspect-[2] bg-white rounded-[20px] rounded-[15px] border-[1px] border-gray-300 flex items-center justify-center overflow-hidden">
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand04.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand04.webp'); ?>"
                                 alt="marquee04"
                                 class="w-full object-cover" />
                         </div>
@@ -217,7 +217,7 @@ get_header();
                         <div
                             class="w-[208px] md:w-full max-w-[300px] aspect-[2] bg-white rounded-[20px] rounded-[15px] border-[1px] border-gray-300 flex items-center justify-center overflow-hidden">
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand05.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand05.webp'); ?>"
                                 alt="marquee05"
                                 class="w-full object-cover" />
                         </div>
@@ -226,7 +226,7 @@ get_header();
                         <div
                             class="w-[208px] md:w-full max-w-[300px] aspect-[2] bg-white rounded-[20px] rounded-[15px] border-[1px] border-gray-300 flex items-center justify-center overflow-hidden">
                             <img
-                                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/brand06.webp' ); ?>"
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand06.webp'); ?>"
                                 alt="marquee06"
                                 class="w-full object-cover" />
                         </div>
@@ -255,62 +255,42 @@ get_header();
             </div>
             <div
                 class="w-full flex flex-col items-center justify-center gap-3 md:gap-3 lg:gap-4 xl:gap-5">
+                <?php
+                $main_query = new WP_Query(array(
+                    'post_type' => 'news',
+                    'posts_per_page' => 3,
+                    'orderby' => 'date',
+                    'order' => 'DESC'
+                ));
+                if ($main_query->have_posts()) :
+                ?>
+                    <?php while ($main_query->have_posts()) : $main_query->the_post(); ?>
+                        <?php $post_title = get_the_title(); ?>
+                        <?php $post_date = get_the_date('Y.m.d'); ?>
+                        <?php $post_content = get_field('description'); ?>
+                        <a
+                            href="<?php echo get_the_permalink(); ?>"
+                            class="w-full max-w-[1000px] rounded-[20px] bg-[#EAF8FF] px-5 py-5 md:px-8 md:py-6 flex flex-col gap-1 md:gap-1 lg:gap-1 xl:gap-2 shadow-sm hover:bg-[#e0f6ff] hover:shadow-md duration-150 cursor-pointer"
+                            data-aos="fade-in"
+                            data-aos-delay="200">
+                            <div class="w-full flex justify-start mb-1">
+                                <span
+                                    class="text-black text-[8px] md:text-[9px] lg:text-[10px] xl:text-[12px] py-[3px] px-[9px] rounded-[10px] border border-[#9F9F9F]"><?php echo $post_date; ?></span>
+                            </div>
+                            <div
+                                class="flex items-center gap-3 text-black text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px] font-medium pt-1 md:pt-2">
+                                <?php echo $post_title; ?>
+                            </div>
+                            <p
+                                class="text-black text-[12px] md:text-[13px] lg:text-[14px] xl:text-[16px]">
+                                <?php echo $post_content; ?>
+                            </p>
+                        </a>
+                    <?php endwhile; ?>
+                <?php endif; ?>
+                <?php wp_reset_postdata(); ?>
                 <a
-                    href="<?php echo esc_url( home_url( '/news-sub/' ) ); ?>"
-                    class="w-full max-w-[1000px] rounded-[20px] bg-[#EAF8FF] px-5 py-5 md:px-8 md:py-6 flex flex-col gap-1 md:gap-1 lg:gap-1 xl:gap-2 shadow-sm hover:bg-[#e0f6ff] hover:shadow-md duration-150 cursor-pointer"
-                    data-aos="fade-in"
-                    data-aos-delay="200">
-                    <div class="w-full flex justify-start mb-1">
-                        <span
-                            class="text-black text-[8px] md:text-[9px] lg:text-[10px] xl:text-[12px] py-[3px] px-[9px] rounded-[10px] border border-[#9F9F9F]">2025.1.10</span>
-                    </div>
-                    <div
-                        class="flex items-center gap-3 text-black text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px] font-medium pt-1 md:pt-2">
-                        新機能を追加しました
-                    </div>
-                    <p
-                        class="text-black text-[12px] md:text-[13px] lg:text-[14px] xl:text-[16px]">
-                        本日、ウェブサイトに新機能を追加しました。より便利にご利用いただけるよう改善を行っております。ぜひご活用ください。
-                    </p>
-                </a>
-                <a
-                    href="<?php echo esc_url( home_url( '/news-sub/' ) ); ?>"
-                    class="w-full max-w-[1000px] rounded-[20px] bg-[#EAF8FF] px-5 py-5 md:px-8 md:py-6 flex flex-col gap-1 md:gap-1 lg:gap-1 xl:gap-2 shadow-sm hover:bg-[#e0f6ff] hover:shadow-md duration-150 cursor-pointer"
-                    data-aos="fade-in"
-                    data-aos-delay="200">
-                    <div class="w-full flex justify-start mb-1">
-                        <span
-                            class="text-black text-[8px] md:text-[9px] lg:text-[10px] xl:text-[12px] py-[3px] px-[9px] rounded-[10px] border border-[#9F9F9F]">2025.1.10</span>
-                    </div>
-                    <div
-                        class="flex items-center gap-3 text-black text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px] font-medium pt-1 md:pt-2">
-                        新機能を追加しました
-                    </div>
-                    <p
-                        class="text-black text-[12px] md:text-[13px] lg:text-[14px] xl:text-[16px]">
-                        本日、ウェブサイトに新機能を追加しました。より便利にご利用いただけるよう改善を行っております。ぜひご活用ください。
-                    </p>
-                </a>
-                <a
-                    href="<?php echo esc_url( home_url( '/news-sub/' ) ); ?>"
-                    class="w-full max-w-[1000px] rounded-[20px] bg-[#EAF8FF] px-5 py-5 md:px-8 md:py-6 flex flex-col gap-1 md:gap-1 lg:gap-1 xl:gap-2 shadow-sm hover:bg-[#e0f6ff] hover:shadow-md duration-150 cursor-pointer"
-                    data-aos="fade-in"
-                    data-aos-delay="200">
-                    <div class="w-full flex justify-start mb-1">
-                        <span
-                            class="text-black text-[8px] md:text-[9px] lg:text-[10px] xl:text-[12px] py-[3px] px-[9px] rounded-[10px] border border-[#9F9F9F]">2025.1.10</span>
-                    </div>
-                    <div
-                        class="flex items-center gap-3 text-black text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px] font-medium pt-1 md:pt-2">
-                        新機能を追加しました
-                    </div>
-                    <p
-                        class="text-black text-[12px] md:text-[13px] lg:text-[14px] xl:text-[16px]">
-                        本日、ウェブサイトに新機能を追加しました。より便利にご利用いただけるよう改善を行っております。ぜひご活用ください。
-                    </p>
-                </a>
-                <a
-                    href="<?php echo esc_url( home_url( '/news/' ) ); ?>"
+                    href="<?php echo esc_url(home_url('/news/')); ?>"
                     class="w-full max-w-[1000px] flex items-center justify-center rounded-[20px] bg-[#28A8E0] hover:bg-[#5ec6f8] py-2 md:py-3 lg:py-4 mt-5 md:mt-6 lg:mt-10 text-white font-bold text-[14px] md:text-[16px] transition-colors duration-150 cursor-pointer"
                     data-aos="fade-in"
                     data-aos-delay="200">
@@ -377,7 +357,7 @@ get_header();
                     心身の健康を支える環境整備、そして「働きがい」や「生きがい」を感じられる仕組みづくりが不可欠です。
                 </p>
                 <a
-                    href="<?php echo esc_url( home_url( '/concept/' ) ); ?>"
+                    href="<?php echo esc_url(home_url('/concept/')); ?>"
                     class="hidden lg:flex items-center justify-center rounded-[20px] bg-[#28A8E0] hover:bg-[#5ec6f8] px-8 md:px-10 lg:px-12 xl:px-14 py-2 md:py-3 lg:py-4 xl:py-5 text-white font-bold text-[12px] md:text-[14px] lg:text-[15px] xl:text-[16px] transition-colors duration-150"
                     data-aos="fade-in"
                     data-aos-delay="200">
@@ -410,12 +390,12 @@ get_header();
                 data-aos="fade-in"
                 data-aos-delay="200">
                 <img
-                    src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/video.webp' ); ?>"
+                    src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/video.webp'); ?>"
                     alt="地域ウェルビーイング"
                     class="max-w-full max-h-[420px] rounded-[20px] bg-white object-contain" />
             </div>
             <a
-                href="<?php echo esc_url( home_url( '/concept/' ) ); ?>"
+                href="<?php echo esc_url(home_url('/concept/')); ?>"
                 class="flex lg:hidden items-center justify-center rounded-[20px] bg-[#28A8E0] hover:bg-[#5ec6f8] px-6 py-2 md:py-3 text-white font-bold text-[12px] md:text-[14px] transition-colors duration-150">
                 コンセプトの詳細
                 <svg
@@ -508,112 +488,56 @@ get_header();
                 </svg>
             </button>
             <div class="swiper swiper-initiative w-full box-border">
-                <div class="swiper-wrapper flex items-center">
-                    <div
-                        class="swiper-slide flex justify-center w-[430px] p-10 md:p-0">
-                        <div
-                            class="bg-[#E0F6FF] rounded-[20px] w-[430px] h-[410px] md:h-[560px] lg:h-[410px] xl:h-[550px] flex flex-col items-center duration-200 overflow-hidden">
-                            <div
-                                class="pt-5 px-7 md:p-6 xl:p-10 xl:pb-0 h-3/5 md:h-18/30">
-                                <img
-                                    src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/business01.webp' ); ?>"
-                                    alt="デジタル寺子屋プロジェクト"
-                                    class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px] group-hover:scale-105 duration-200" />
-                            </div>
-                            <div
-                                class="px-6 flex-1 w-full h-2/5 md:h-12/30 flex flex-col justify-start pt-8 md:pt-10 lg:pt-6 xl:pt-10">
-                                <h3
-                                    class="font-bold text-[16px] md:text-[18px] xl:text-[20px] text-black mb-3 md:mb-5 lg:mb-3 xl:mb-4 line-clamp-1">
-                                    生成AIコミュニティ
-                                </h3>
-                                <p
-                                    class="text-[14px] md:text-[16px] xl:text-[18px] text-black leading-relaxed line-clamp-3">
-                                    2026年3月開始予定。
-                                    生成AIを使って楽しみを見つける人とつながる場を提供します。
-                                    2026年3月開始予定。
-                                    生成AIを使って楽しみを見つける人とつながる場を提供します。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="swiper-slide flex justify-center w-[430px] p-10 md:p-0">
-                        <div
-                            class="bg-[#E0F6FF] rounded-[20px] w-[430px] h-[410px] md:h-[560px] lg:h-[410px] xl:h-[550px] flex flex-col items-center duration-200 overflow-hidden">
-                            <div
-                                class="pt-5 px-7 md:p-6 xl:p-10 xl:pb-0 h-3/5 md:h-18/30">
-                                <img
-                                    src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/business02.webp' ); ?>"
-                                    alt="新たな住まい支援"
-                                    class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px] group-hover:scale-105 duration-200" />
-                            </div>
-                            <div
-                                class="px-6 flex-1 w-full h-2/5 md:h-12/30 flex flex-col justify-start pt-8 md:pt-10 lg:pt-6 xl:pt-10">
-                                <h3
-                                    class="font-bold text-[16px] md:text-[18px] xl:text-[20px] text-black mb-3 md:mb-5 lg:mb-3 xl:mb-4 line-clamp-1">
-                                    猫と暮らす住宅
-                                </h3>
-                                <p
-                                    class="text-[14px] md:text-[16px] xl:text-[18px] text-black leading-relaxed line-clamp-3">
-                                    2027年春目標。人と猫が共生することで、地域のウェルビーイングを向上させます。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="swiper-slide flex justify-center w-[430px] p-10 md:p-0">
-                        <div
-                            class="bg-[#E0F6FF] rounded-[20px] w-[430px] h-[410px] md:h-[560px] lg:h-[410px] xl:h-[550px] flex flex-col items-center duration-200 overflow-hidden">
-                            <div
-                                class="pt-5 px-7 md:p-6 xl:p-10 xl:pb-0 h-3/5 md:h-18/30">
-                                <img
-                                    src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/business03.webp' ); ?>"
-                                    alt="地域ネットワーク"
-                                    class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px] group-hover:scale-105 duration-200" />
-                            </div>
-                            <div
-                                class="px-6 flex-1 w-full h-2/5 md:h-12/30 flex flex-col justify-start pt-8 md:pt-10 lg:pt-6 xl:pt-10">
-                                <h3
-                                    class="font-bold text-[16px] md:text-[18px] xl:text-[20px] text-black mb-3 md:mb-5 lg:mb-3 xl:mb-4 line-clamp-1">
-                                    地域コミュニティ
-                                </h3>
-                                <p
-                                    class="text-[14px] md:text-[16px] xl:text-[18px] text-black leading-relaxed line-clamp-3">
-                                    東大阪・八戸ノ里エリアを中心に、住みやすい街づくりに貢献しています。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="swiper-slide flex justify-center w-[430px] p-10 md:p-0">
-                        <div
-                            class="bg-[#E0F6FF] rounded-[20px] w-[430px] h-[410px] md:h-[560px] lg:h-[410px] xl:h-[550px] flex flex-col items-center duration-200 overflow-hidden">
-                            <div
-                                class="pt-5 px-7 md:p-6 xl:p-10 xl:pb-0 h-3/5 md:h-18/30">
-                                <img
-                                    src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/business04.webp' ); ?>"
-                                    alt="地域の医療・福祉サポート"
-                                    class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px] group-hover:scale-105 duration-200" />
-                            </div>
-                            <div
-                                class="px-6 flex-1 w-full h-2/5 md:h-12/30 flex flex-col justify-start pt-8 md:pt-10 lg:pt-6 xl:pt-10">
-                                <h3
-                                    class="font-bold text-[16px] md:text-[18px] xl:text-[20px] text-black mb-3 md:mb-5 lg:mb-3 xl:mb-4 line-clamp-1">
-                                    地域コミュニティ
-                                </h3>
-                                <p
-                                    class="text-[14px] md:text-[16px] xl:text-[18px] text-black leading-relaxed line-clamp-3">
-                                    東大阪・八戸ノ里エリアを中心に、住みやすい街づくりに貢献しています。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="swiper-wrapper flex items-center pb-2">
+                    <?php
+                    $main_query = new WP_Query(array(
+                        'post_type' => 'business',
+                        'posts_per_page' => -1,
+                        'orderby' => 'date',
+                        'order' => 'DESC'
+                    ));
+                    if ($main_query->have_posts()) :
+                        while ($main_query->have_posts()) : $main_query->the_post();
+                            $post_title = get_the_title();
+                            $post_content = get_field('content');
+                            $post_image = get_field('image');
+                    ?>
+                            <a
+                                href="<?php echo get_the_permalink(); ?>"
+                                class="swiper-slide flex justify-center w-[430px] p-10 md:p-0">
+                                <div
+                                    class="bg-[#E0F6FF] rounded-[20px] w-[430px] h-[410px] md:h-[560px] lg:h-[410px] xl:h-[550px] flex flex-col items-center duration-200 overflow-hidden hover:shadow-md duration-200 rounded-[20px]">
+                                    <div
+                                        class="pt-5 px-7 md:p-6 xl:p-10 xl:pb-0 h-3/5 md:h-18/30">
+                                        <img
+                                            src="<?php echo $post_image; ?>"
+                                            alt="<?php echo $post_title; ?>"
+                                            class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px] group-hover:scale-105 duration-200" />
+                                    </div>
+                                    <div
+                                        class="px-6 xl:p-10 flex-1 w-full h-2/5 md:h-12/30 flex flex-col justify-start pt-8 md:pt-10 lg:pt-6 xl:pt-10">
+                                        <h3
+                                            class="font-bold text-[16px] md:text-[18px] xl:text-[20px] text-black mb-3 md:mb-5 lg:mb-3 xl:mb-4 line-clamp-1">
+                                            <?php echo $post_title; ?>
+                                        </h3>
+                                        <p
+                                            class="text-[14px] md:text-[16px] xl:text-[18px] text-black leading-relaxed line-clamp-3">
+                                            <?php echo $post_content; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                    <?php
+                        endwhile;
+                        wp_reset_postdata();
+                    endif;
+                    ?>
                 </div>
             </div>
         </div>
         <div class="flex justify-center">
             <a
-                href="<?php echo esc_url( home_url( '/company/' ) ); ?>"
+                href="<?php echo esc_url(home_url('/business/')); ?>"
                 class="flex items-center justify-center rounded-[20px] bg-[#28A8E0] hover:bg-[#5ec6f8] px-8 md:px-10 lg:px-[30px] xl:px-[93px] py-2 md:py-3 lg:py-4 xl:py-5 text-white font-bold text-[12px] md:text-[16px] transition-colors duration-150"
                 data-aos="fade-in"
                 data-aos-delay="200">
@@ -659,105 +583,73 @@ get_header();
         </div>
         <hr
             class="block md:hidden mx-auto w-[90%] border-t-1 border-gray-600 -mt-4" />
-        <div class="w-full flex flex-col items-center gap-10">
+        <div class="w-full flex flex-col items-center gap-10 lg:gap-12 xl:gap-16">
             <div
                 class="relative w-full md:w-[430px] lg:w-full lg:max-w-[960px] xl:max-w-[1400px]">
                 <div class="w-full">
                     <div
                         class="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-8 lg:gap-5">
-                        <div class="swiper-slide flex justify-center">
-                            <a
-                                href="<?php echo esc_url( home_url( '/news-sub/' ) ); ?>"
-                                class="bg-white rounded-[20px] max-w-[295px] md:max-w-[430px] lg:max-w-[300px] xl:max-w-[430px] h-[460px] md:h-[560px] lg:h-[425px] xl:h-[550px] flex flex-col items-center p-6 xl:p-10 gap-5 md:gap-4 lg:gap-2 group hover:shadow-md duration-200">
-                                <div
-                                    class="h-3/5 md:h-2/3 lg:h-3/5 xl:h-2/3 overflow-hidden rounded-[20px]">
-                                    <img
-                                        src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/blog01.webp' ); ?>"
-                                        alt="お知らせ1"
-                                        class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px] group-hover:scale-105 duration-200" />
+                        <?php
+                        $main_query = new WP_Query(array(
+                            'post_type' => 'announcement',
+                            'posts_per_page' => 3,
+                            'orderby' => 'date',
+                            'order' => 'DESC'
+                        ));
+                        if ($main_query->have_posts()) :
+                            while ($main_query->have_posts()) : $main_query->the_post();
+                                $post_title = get_the_title();
+                                $post_date = get_the_date('Y.m.d');
+                                $post_content = get_field('announce_desc');
+                                $post_image = get_field('announce_img');
+                                $post_categories = get_the_terms(get_the_ID(), 'announcement_category');
+                                if (!$post_categories) {
+                                    $post_categories = [];
+                                }
+                        ?>
+                                <div class="swiper-slide flex justify-center">
+                                    <a
+                                        href="<?php echo get_the_permalink(); ?>"
+                                        class="bg-white rounded-[20px] max-w-[295px] md:max-w-[430px] lg:max-w-[300px] xl:max-w-[430px] h-[460px] md:h-[560px] lg:h-[425px] xl:h-[550px] flex flex-col items-center p-6 xl:p-10 gap-5 md:gap-4 lg:gap-2 group hover:shadow-md duration-200">
+                                        <div
+                                            class="h-3/5 md:h-2/3 lg:h-3/5 xl:h-2/3 overflow-hidden rounded-[20px]">
+                                            <div class="w-full h-fit overflow-hidden rounded-[20px]">
+                                                <img
+                                                    src="<?php echo $post_image; ?>"
+                                                    alt="<?php echo $post_title; ?>"
+                                                    class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px] group-hover:scale-105 duration-200" />
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="h-1/3 flex-1 w-full flex flex-col gap-5 lg:gap-3 xl:gap-4">
+                                            <div class="flex gap-3 mb-2">
+                                                <span
+                                                    class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] text-[10px] md:text-[12px] lg:text-[11px] text-[12px] font-regular">
+                                                    <?php echo $post_date; ?>
+                                                </span>
+                                                <?php if (!empty($post_categories)) : ?>
+                                                    <span
+                                                        class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] text-[10px] md:text-[12px] lg:text-[11px] text-[12px] font-regular"><?php echo $post_categories[0]->name; ?></span>
+                                                <?php endif; ?>
+                                            </div>
+                                            <p
+                                                class="text-[14px] md:text-[16px] lg:text-[16px] leading-relaxed md:leading-[2] lg:leading-relaxed line-clamp-4">
+                                                <?php echo $post_content; ?>
+                                            </p>
+                                        </div>
+                                    </a>
                                 </div>
-                                <div
-                                    class="h-1/3 flex-1 w-full flex flex-col gap-5 lg:gap-3 xl:gap-4">
-                                    <div class="flex gap-3 mb-2">
-                                        <span
-                                            class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] text-[10px] md:text-[12px] lg:text-[11px] text-[12px] font-regular">
-                                            2025.1.10
-                                        </span>
-                                        <span
-                                            class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] text-[10px] md:text-[12px] lg:text-[11px] text-[12px] font-regular">地域情報</span>
-                                    </div>
-                                    <p
-                                        class="text-[14px] md:text-[16px] lg:text-[16px] leading-relaxed md:leading-[2] lg:leading-relaxed line-clamp-4">
-                                        東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-                                        東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-                                        東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-                                        東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide flex justify-center">
-                            <a
-                                href="<?php echo esc_url( home_url( '/news-sub/' ) ); ?>"
-                                class="bg-white rounded-[20px] max-w-[295px] md:max-w-[430px] lg:max-w-[300px] xl:max-w-[430px] h-[460px] md:h-[560px] lg:h-[425px] xl:h-[550px] flex flex-col items-center p-6 xl:p-10 gap-5 md:gap-4 lg:gap-2 group hover:shadow-md duration-200">
-                                <div
-                                    class="h-3/5 md:h-2/3 lg:h-3/5 xl:h-2/3 overflow-hidden rounded-[20px]">
-                                    <img
-                                        src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/blog02.webp' ); ?>"
-                                        alt="お知らせ2"
-                                        class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px] group-hover:scale-105 duration-200" />
-                                </div>
-                                <div
-                                    class="h-1/3 flex-1 w-full flex flex-col gap-5 lg:gap-3 xl:gap-4">
-                                    <div class="flex gap-3 mb-2">
-                                        <span
-                                            class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] text-[10px] md:text-[12px] lg:text-[11px] text-[12px] font-regular">
-                                            2025.1.10
-                                        </span>
-                                        <span
-                                            class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] text-[10px] md:text-[12px] lg:text-[11px] text-[12px] font-regular">
-                                            地域情報
-                                        </span>
-                                    </div>
-                                    <p
-                                        class="text-[14px] md:text-[16px] lg:text-[16px] leading-relaxed md:leading-[2] lg:leading-relaxed line-clamp-4">
-                                        東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide flex justify-center">
-                            <a
-                                href="<?php echo esc_url( home_url( '/news-sub/' ) ); ?>"
-                                class="bg-white rounded-[20px] max-w-[295px] md:max-w-[430px] lg:max-w-[300px] xl:max-w-[430px] h-[460px] md:h-[560px] lg:h-[425px] xl:h-[550px] flex flex-col items-center p-6 xl:p-10 gap-5 md:gap-4 lg:gap-2 group hover:shadow-md duration-200">
-                                <div
-                                    class="h-3/5 md:h-2/3 lg:h-3/5 xl:h-2/3 overflow-hidden rounded-[20px]">
-                                    <img
-                                        src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/map.webp' ); ?>"
-                                        alt="お知らせ3"
-                                        class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px] group-hover:scale-105 duration-200" />
-                                </div>
-                                <div
-                                    class="h-1/3 flex-1 w-full flex flex-col gap-5 lg:gap-3 xl:gap-4">
-                                    <div class="flex gap-3 mb-2">
-                                        <span
-                                            class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] text-[10px] md:text-[12px] lg:text-[11px] text-[12px] font-regular">2025.1.10</span>
-                                        <span
-                                            class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] text-[10px] md:text-[12px] lg:text-[11px] text-[12px] font-regular">地域情報</span>
-                                    </div>
-                                    <p
-                                        class="text-[14px] md:text-[16px] lg:text-[16px] leading-relaxed md:leading-[2] lg:leading-relaxed line-clamp-4">
-                                        東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
+                        <?php
+                            endwhile;
+                            wp_reset_postdata();
+                        endif;
+                        ?>
                     </div>
                 </div>
             </div>
             <div class="flex justify-center">
                 <a
-                    href="<?php echo esc_url( home_url( '/announcement/' ) ); ?>"
+                    href="<?php echo esc_url(home_url('/announcement/')); ?>"
                     class="flex items-center justify-center lg:w-[300px] xl:w-[430px] rounded-[20px] bg-[#28A8E0] hover:bg-[#5ec6f8] px-8 md:px-10 lg:px-12 xl:px-14 py-2 md:py-3 lg:py-4 xl:py-5 text-white font-bold text-[12px] md:text-[14px] lg:text-[15px] xl:text-[16px] transition-colors duration-150"
                     data-aos="fade-in"
                     data-aos-delay="200">

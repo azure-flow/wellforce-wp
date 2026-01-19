@@ -5,6 +5,9 @@ $post_image = get_field('announce_img');
 $post_date = get_the_date('Y.m.d');
 $post_content = get_field('announce_desc');
 $post_categories = get_the_terms(get_the_ID(), 'announcement_category');
+if (!$post_categories) {
+  $post_categories = [];
+}
 ?>
 
 <section
@@ -46,8 +49,10 @@ $post_categories = get_the_terms(get_the_ID(), 'announcement_category');
       <div class="flex gap-3">
         <span
           class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular"><?php echo $post_date; ?></span>
-        <span
-          class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular"><?php echo $post_categories[0]->name; ?></span>
+        <?php if (!empty($post_categories)) : ?>
+          <span
+            class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular"><?php echo $post_categories[0]->name; ?></span>
+        <?php endif; ?>
       </div>
     </div>
     <div
@@ -56,7 +61,7 @@ $post_categories = get_the_terms(get_the_ID(), 'announcement_category');
         class="w-full lg:w-[62%] flex flex-col gap-8 md:gap-12 lg:gap-20">
         <img
           src="<?php echo esc_url($post_image); ?>"
-          alt="お知らせ1"
+          alt="<?php echo $post_title; ?>"
           class="w-full aspect-[1.5] object-cover rounded-[20px]" />
         <p
           class="text-[14px] md:text-[16px] lg:text-[14px] xl:text-[16px] leading-[2.2]">
@@ -65,81 +70,87 @@ $post_categories = get_the_terms(get_the_ID(), 'announcement_category');
       </div>
 
       <div class="w-full lg:w-[38%] flex flex-col gap-3 xl:gap-4">
-        <div
-          class="w-full flex gap-2 gap-8 lg:gap-4 xl:gap-6 bg-[#F5FCFF] rounded-[20px] p-3 md:py-4 md:px-5 lg:px-4 xl:py-5 xl:px-7">
-          <div class="w-[35%] md:w-[20%] lg:w-[35%]">
-            <img
-              src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/blog01.webp'); ?>"
-              alt="お知らせ1"
-              class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px]" />
-          </div>
-          <div
-            class="w-[65%] md:w-[80%] lg:w-[65%] flex flex-col gap-2 md:gap-4 lg:gap-2 xl:gap-3">
-            <div class="flex gap-3">
-              <span
-                class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular">2025.1.10</span>
-              <span
-                class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular">地域情報</span>
-            </div>
-            <p
-              class="text-[14px] md:text-[14px] lg:text-[12px] xl:text-[16px] leading-relaxed xl:leading-[2] line-clamp-2">
-              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-            </p>
-          </div>
-        </div>
-        <div
-          class="w-full flex gap-2 gap-8 lg:gap-4 xl:gap-6 bg-[#F5FCFF] rounded-[20px] p-3 md:py-4 md:px-5 lg:px-4 xl:py-5 xl:px-7">
-          <div class="w-[35%] md:w-[20%] lg:w-[35%]">
-            <img
-              src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/blog01.webp'); ?>"
-              alt="お知らせ1"
-              class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px]" />
-          </div>
-          <div
-            class="w-[65%] md:w-[80%] lg:w-[65%] flex flex-col gap-2 md:gap-4 lg:gap-2 xl:gap-3">
-            <div class="flex gap-3">
-              <span
-                class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular">2025.1.10</span>
-              <span
-                class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular">地域情報</span>
-            </div>
-            <p
-              class="text-[14px] md:text-[14px] lg:text-[12px] xl:text-[16px] leading-relaxed xl:leading-[2] line-clamp-2">
-              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-            </p>
-          </div>
-        </div>
-        <div
-          class="w-full flex gap-2 gap-8 lg:gap-4 xl:gap-6 bg-[#F5FCFF] rounded-[20px] p-3 md:py-4 md:px-5 lg:px-4 xl:py-5 xl:px-7">
-          <div class="w-[35%] md:w-[20%] lg:w-[35%]">
-            <img
-              src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/blog01.webp'); ?>"
-              alt="お知らせ1"
-              class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px]" />
-          </div>
-          <div
-            class="w-[65%] md:w-[80%] lg:w-[65%] flex flex-col gap-2 md:gap-4 lg:gap-2 xl:gap-3">
-            <div class="flex gap-3">
-              <span
-                class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular">2025.1.10</span>
-              <span
-                class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular">地域情報</span>
-            </div>
-            <p
-              class="text-[14px] md:text-[14px] lg:text-[12px] xl:text-[16px] leading-relaxed xl:leading-[2] line-clamp-2">
-              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-              東大阪市八戸ノ里駅周辺の生活環境や交通アクセスについてご紹介します。
-            </p>
-          </div>
-        </div>
+        <?php
+        // Custom: gather previous 2 and next 2 announcements (excluding current)
+        global $post;
+        $current_post_id = get_the_ID();
+
+        // Fetch all announcements in date order
+        $all_args = array(
+          'post_type'      => 'announcement',
+          'posts_per_page' => -1,
+          'orderby'        => 'date',
+          'order'          => 'DESC',
+          'fields'         => 'ids',
+        );
+        $all_announcements = get_posts($all_args);
+
+        // Find current post's index in this sorted list
+        $current_index = array_search($current_post_id, $all_announcements);
+
+        // Get prev 2 and next 2 IDs
+        $show_ids = [];
+
+        // Previous two (before current, in DESC order, so lower index = "later" date)
+        for ($i = $current_index - 2; $i < $current_index; $i++) {
+          if ($i >= 0 && isset($all_announcements[$i])) {
+            $show_ids[] = $all_announcements[$i];
+          }
+        }
+
+        // Next two (after current, higher index = "older" date in DESC)
+        for ($i = $current_index + 1; $i <= $current_index + 2; $i++) {
+          if (isset($all_announcements[$i])) {
+            $show_ids[] = $all_announcements[$i];
+          }
+        }
+
+        // Remove current post (should not be in $show_ids, but just in case)
+        $show_ids = array_diff($show_ids, [$current_post_id]);
+        // Limit to max 4 as expected
+        $show_ids = array_slice($show_ids, 0, 4);
+
+        if (!empty($show_ids)) :
+          $side_query = new WP_Query(array(
+            'post_type' => 'announcement',
+            'post__in' => $show_ids,
+            'orderby'  => 'post__in'
+          ));
+          while ($side_query->have_posts()) : $side_query->the_post();
+            $related_title = get_the_title();
+            $related_date = get_the_date('Y.m.d');
+            $related_categories = get_the_terms(get_the_ID(), 'announcement_category');
+            $related_image = get_field('announce_img');
+            $related_content = get_field('announce_desc');
+        ?>
+            <a href="<?php echo get_the_permalink(); ?>" class="w-full flex gap-2 gap-8 lg:gap-4 xl:gap-6 bg-[#F5FCFF] rounded-[20px] p-3 md:py-4 md:px-5 lg:px-4 xl:py-5 xl:px-7 hover:shadow-md duration-200">
+              <div class="w-[35%] md:w-[20%] lg:w-[35%]">
+                <img
+                  src="<?php echo esc_url($related_image ? $related_image : get_template_directory_uri() . '/assets/images/blog01.webp'); ?>"
+                  alt="<?php echo esc_attr($related_title); ?>"
+                  class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px]" />
+              </div>
+              <div
+                class="w-[65%] md:w-[80%] lg:w-[65%] flex flex-col gap-2 md:gap-4 lg:gap-2 xl:gap-3">
+                <div class="flex gap-3">
+                  <span
+                    class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular"><?php echo $related_date; ?></span>
+                  <?php if (!empty($related_categories) && !is_wp_error($related_categories)) : ?>
+                    <span
+                      class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] xl:py-1 xl:px-5 text-[10px] md:text-[12px] lg:text-[10px] xl:text-[12px] font-regular"><?php echo $related_categories[0]->name; ?></span>
+                  <?php endif; ?>
+                </div>
+                <p
+                  class="text-[14px] md:text-[14px] lg:text-[12px] xl:text-[16px] leading-relaxed xl:leading-[2] line-clamp-2">
+                  <?php echo esc_html($related_content); ?>
+                </p>
+              </div>
+            </a>
+        <?php
+          endwhile;
+          wp_reset_postdata();
+        endif;
+        ?>
       </div>
     </div>
   </div>

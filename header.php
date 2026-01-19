@@ -130,6 +130,8 @@
 
 <body class="relative">
     <header
+        data-is-front-page="<?php echo (is_front_page() || is_home()) ? 'true' : 'false'; ?>"
+        data-is-single-news="<?php echo (is_singular('news')) ? 'true' : 'false'; ?>"
         class="fixed max-w-[1400px] md:left-1/2 md:-translate-x-1/2 top-0 md:top-4 lg:top-6 xl:top-8 w-full md:w-[90%] lg:w-[95%] xl:w-full top-0 z-50 bg-white hover:bg-[#e2f5ffb3] transition-colors duration-200 rounded-none md:rounded-[20px]">
         <div
             class="max-w-[1440px] w-full flex flex-row justify-between items-center px-5 md:px-12 lg:px-20 xl:px-32 py-3 lg:py-4 xl:py-6">

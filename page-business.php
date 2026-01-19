@@ -1,7 +1,7 @@
 <?php
 get_header();
 $main_query = new WP_Query(array(
-    'post_type' => 'announcement',
+    'post_type' => 'business',
     'posts_per_page' => -1,
     'orderby' => 'date',
     'order' => 'DESC'
@@ -15,11 +15,11 @@ $main_query = new WP_Query(array(
         class="mx-auto flex flex-col items-center justify-center w-full mt-14 md:mt-16 lg:mt-28 xl:mt-32">
         <div
             class="text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] text-white font-medium mb-2">
-            Blog
+            Business
         </div>
         <h2
             class="text-[30px] md:text-[36px] lg:text-[40px] xl:text-[50px] text-white font-medium mb-3">
-            お知らせ
+            ビジネス
         </h2>
         <div
             class="max-w-[280px] md:max-w-full text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] text-white font-medium text-start md:text-center leading-6">
@@ -35,7 +35,7 @@ $main_query = new WP_Query(array(
         <a
             href="<?php echo home_url(); ?>"
             class="hover:text-[#28A8E0] hover:underline underline-offset-2 cursor-pointer select-none transition-colors duration-200">株式会社ウエルフォース</a>
-        / お知らせ
+        / ビジネス
     </div>
 </section>
 
@@ -49,14 +49,10 @@ $main_query = new WP_Query(array(
             if ($main_query->have_posts()) :
                 while ($main_query->have_posts()) : $main_query->the_post();
                     $post_title = get_the_title();
-                    $post_date = get_the_date('Y.m.d');
-                    $post_categories = get_the_terms(get_the_ID(), 'announcement_category');
-                    if (!$post_categories) {
-                        $post_categories = [];
-                    }
-                    $post_image = get_field('announce_img');
-                    $post_content = get_field('announce_desc');
+                    $post_image = get_field('image');
+                    $post_content = get_field('content');
             ?>
+
                     <div class="swiper-slide flex justify-center">
                         <a
                             href="<?php echo get_the_permalink(); ?>"
@@ -67,17 +63,11 @@ $main_query = new WP_Query(array(
                                     alt="<?php echo $post_title; ?>"
                                     class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px] group-hover:scale-105 duration-200" />
                             </div>
-                            <div class="flex-1 w-full flex flex-col gap-4 xl:gap-5">
-                                <div class="flex gap-3">
-                                    <span
-                                        class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] text-[10px] md:text-[12px] lg:text-[11px] text-[12px] font-regular">
-                                        <?php echo $post_date; ?>
-                                    </span>
-                                    <?php if (!empty($post_categories)) : ?>
-                                        <span
-                                            class="bg-[#E0F6FF] text-black rounded-full px-3 py-[2px] text-[10px] md:text-[12px] lg:text-[11px] text-[12px] font-regular"><?php echo $post_categories[0]->name; ?></span>
-                                    <?php endif; ?>
-                                </div>
+                            <div class="flex-1 w-full flex flex-col gap-3 xl:gap-4">
+                                <h3
+                                    class="font-bold text-[16px] md:text-[18px] xl:text-[20px] text-black line-clamp-1">
+                                    <?php echo $post_title; ?>
+                                </h3>
                                 <p
                                     class="text-[14px] md:text-[16px] lg:text-[14px] xl:text-[16px] leading-relaxed md:leading-[2] lg:leading-relaxed line-clamp-4">
                                     <?php echo $post_content; ?>

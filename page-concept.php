@@ -142,87 +142,196 @@ get_header();
             4つの価値
           </h1>
         </div>
+
+        <?php
+        $values_data = array();
+        $i = 0;
+
+        $values_query = new WP_Query(array(
+          'post_type' => '4_values',
+          'posts_per_page' => -1
+        ));
+
+        if ($values_query->have_posts()) :
+          while ($values_query->have_posts()) : $values_query->the_post();
+            $values_data[] = array(
+              'id' => $i + 1,
+              'title_en' => get_field('title_en'),
+              'title_ja' => get_field('title_ja'),
+              'content' => get_field('content'),
+              'position' => get_field('position')
+            );
+            $i++;
+          endwhile;
+          wp_reset_postdata();
+        endif;
+        ?>
+
         <div
-          class="bg-[#23ADE9] px-4 md:px-10 lg:px-0 py-4 flex justify-center items-center lg:rotate-45 w-full md:w-full lg:w-[300px] xl:w-[480px] lg:aspect-[1] lg:absolute top-0 left-1/2 lg:-translate-x-1/2 rounded-[20px]">
+          class="bg-[#23ADE9] hover:bg-[#00a3f0] duration-200 px-4 md:px-10 lg:px-0 py-4 flex justify-center items-center lg:rotate-45 w-full md:w-full lg:w-[300px] xl:w-[480px] lg:aspect-[1] lg:absolute top-0 left-1/2 lg:-translate-x-1/2 rounded-[20px]">
           <div
             class="relative lg:-rotate-45 flex lg:flex-col justify-between w-full items-center">
             <div
               class="flex flex-col items-center justify-center w-[62px] md:w-[90px] aspect-[1] lg:w-auto lg:aspect-auto rounded-full bg-white lg:bg-transparent">
               <div
                 class="text-[8px] md:text-[12px] lg:text-[14px] xl:text-[16px] text-black lg:text-white font-bold lg:mb-1 xl:mb-2">
-                Health
+                <?php
+                foreach ($values_data as $v) {
+                  if ($v['position'] === 'top') {
+                    echo $v['title_en'];
+                    break;
+                  }
+                }
+                ?>
               </div>
               <h1
                 class="text-[16px] md:text-[20px] lg:text-[28px] xl:text-[40px] text-black lg:text-white font-bold lg:mb-5 xl:mb-8">
-                健康
+                <?php
+                foreach ($values_data as $v) {
+                  if ($v['position'] === 'top') {
+                    echo $v['title_ja'];
+                    break;
+                  }
+                }
+                ?>
               </h1>
             </div>
             <div
-              class="text-[14px] md:text-[15px] lg:text-[14px] xl:text-[18px] text-white text-start lg:text-center font-regular lg;font-bold">
-              心身の健康を大切にし、健やかな生<br />活を送れる環境を整備します。
+              class="text-[14px] md:text-[15px] lg:text-[14px] xl:text-[18px] text-white text-start lg:text-center font-regular lg:font-bold">
+              <?php
+              foreach ($values_data as $v) {
+                if ($v['position'] === 'top') {
+                  echo nl2br(wp_kses_post($v['content']));
+                  break;
+                }
+              }
+              ?>
             </div>
           </div>
         </div>
         <div
-          class="bg-[#23ADE9] px-4 md:px-10 lg:px-0 py-4 flex justify-center items-center lg:rotate-45 w-full md:w-full lg:w-[300px] xl:w-[480px] lg:aspect-[1] lg:absolute right-0 top-1/2 lg:-translate-y-1/2 rounded-[20px]">
+          class="bg-[#23ADE9] hover:bg-[#00a3f0] duration-200 px-4 md:px-10 lg:px-0 py-4 flex justify-center items-center lg:rotate-45 w-full md:w-full lg:w-[300px] xl:w-[480px] lg:aspect-[1] lg:absolute right-0 top-1/2 lg:-translate-y-1/2 rounded-[20px]">
           <div
             class="relative lg:-rotate-45 flex flex-row-reverse lg:flex-col justify-between w-full items-center lg:pl-2 xl:pl-4">
             <div
               class="flex flex-col items-center justify-center w-[62px] md:w-[90px] aspect-[1] lg:w-auto lg:aspect-auto rounded-full bg-white lg:bg-transparent">
               <div
                 class="text-[8px] md:text-[12px] lg:text-[14px] xl:text-[16px] text-black lg:text-white font-bold lg:mb-1 xl:mb-2">
-                Community
+                <?php
+                foreach ($values_data as $v) {
+                  if ($v['position'] === 'right') {
+                    echo $v['title_en'];
+                    break;
+                  }
+                }
+                ?>
               </div>
               <h1
                 class="text-[14px] md:text-[18px] lg:text-[28px] xl:text-[40px] text-black lg:text-white font-bold lg:mb-5 xl:mb-8 leading-[1]">
-                コミュ<br class="block lg:hidden" />ニティ
+                <?php
+                foreach ($values_data as $v) {
+                  if ($v['position'] === 'right') {
+                    echo $v['title_ja'];
+                    break;
+                  }
+                }
+                ?>
               </h1>
             </div>
             <div
-              class="text-[14px] md:text-[15px] lg:text-[14px] xl:text-[18px] text-white text-start lg:text-center font-regular lg;font-bold">
-              心身の健康を大切にし、健やかな生<br />活を送れる環境を整備します。
+              class="text-[14px] md:text-[15px] lg:text-[14px] xl:text-[18px] text-white text-start lg:text-center font-regular lg:font-bold">
+              <?php
+              foreach ($values_data as $v) {
+                if ($v['position'] === 'right') {
+                  echo nl2br(wp_kses_post($v['content']));
+                  break;
+                }
+              }
+              ?>
             </div>
           </div>
         </div>
         <div
-          class="bg-[#23ADE9] px-4 md:px-10 lg:px-0 py-4 flex justify-center items-center lg:rotate-45 w-full md:w-full lg:w-[300px] xl:w-[480px] lg:aspect-[1] lg:absolute bottom-0 left-1/2 lg:-translate-x-1/2 rounded-[20px]">
+          class="bg-[#23ADE9] hover:bg-[#00a3f0] duration-200 px-4 md:px-10 lg:px-0 py-4 flex justify-center items-center lg:rotate-45 w-full md:w-full lg:w-[300px] xl:w-[480px] lg:aspect-[1] lg:absolute bottom-0 left-1/2 lg:-translate-x-1/2 rounded-[20px]">
           <div
             class="relative lg:-rotate-45 flex lg:flex-col justify-between w-full items-center">
             <div
               class="flex flex-col items-center justify-center w-[62px] md:w-[90px] aspect-[1] lg:w-auto lg:aspect-auto rounded-full bg-white lg:bg-transparent">
               <div
                 class="text-[8px] md:text-[12px] lg:text-[14px] xl:text-[16px] text-black lg:text-white font-bold lg:mb-1 xl:mb-2">
-                Purpose
+                <?php
+                foreach ($values_data as $v) {
+                  if ($v['position'] === 'down') {
+                    echo $v['title_en'];
+                    break;
+                  }
+                }
+                ?>
               </div>
               <h1
                 class="text-[16px] md:text-[20px] lg:text-[28px] xl:text-[40px] text-black lg:text-white font-bold lg:mb-5 xl:mb-8">
-                目的
+                <?php
+                foreach ($values_data as $v) {
+                  if ($v['position'] === 'down') {
+                    echo $v['title_ja'];
+                    break;
+                  }
+                }
+                ?>
               </h1>
             </div>
             <div
-              class="text-[14px] md:text-[15px] lg:text-[14px] xl:text-[18px] text-white text-start lg:text-center font-regular lg;font-bold">
-              働きがいや生きがいを感じられる仕<br />組みづくりを推進します。
+              class="text-[14px] md:text-[15px] lg:text-[14px] xl:text-[18px] text-white text-start lg:text-center font-regular lg:font-bold">
+              <?php
+              foreach ($values_data as $v) {
+                if ($v['position'] === 'down') {
+                  echo nl2br(wp_kses_post($v['content']));
+                  break;
+                }
+              }
+              ?>
             </div>
           </div>
         </div>
         <div
-          class="bg-[#23ADE9] px-4 md:px-10 lg:px-0 py-4 flex justify-center items-center lg:rotate-45 w-full md:w-full lg:w-[300px] xl:w-[480px] lg:aspect-[1] lg:absolute left-0 bottom-1/2 lg:translate-y-1/2 rounded-[20px]">
+          class="bg-[#23ADE9] hover:bg-[#00a3f0] duration-200 px-4 md:px-10 lg:px-0 py-4 flex justify-center items-center lg:rotate-45 w-full md:w-full lg:w-[300px] xl:w-[480px] lg:aspect-[1] lg:absolute left-0 bottom-1/2 lg:translate-y-1/2 rounded-[20px]">
           <div
             class="relative lg:-rotate-45 flex flex-row-reverse lg:flex-col justify-between w-full items-center lg:pr-2 xl:pr-4">
             <div
               class="flex flex-col items-center justify-center w-[62px] md:w-[90px] aspect-[1] lg:w-auto lg:aspect-auto rounded-full bg-white lg:bg-transparent">
               <div
                 class="text-[8px] md:text-[12px] lg:text-[14px] xl:text-[16px] text-black lg:text-white font-bold lg:mb-1 xl:mb-2">
-                Environment
+                <?php
+                foreach ($values_data as $v) {
+                  if ($v['position'] === 'left') {
+                    echo $v['title_en'];
+                    break;
+                  }
+                }
+                ?>
               </div>
               <h1
                 class="text-[16px] md:text-[20px] lg:text-[28px] xl:text-[40px] text-black lg:text-white font-bold lg:mb-5 xl:mb-8">
-                環境
+                <?php
+                foreach ($values_data as $v) {
+                  if ($v['position'] === 'left') {
+                    echo $v['title_ja'];
+                    break;
+                  }
+                }
+                ?>
               </h1>
             </div>
             <div
-              class="text-[14px] md:text-[15px] lg:text-[14px] xl:text-[18px] text-white text-start lg:text-center font-regular lg;font-bold">
-              持続可能な環境づくりと、人と動物<br />が共生できる社会を目指します。
+              class="text-[14px] md:text-[15px] lg:text-[14px] xl:text-[18px] text-white text-start lg:text-center font-regular lg:font-bold">
+              <?php
+              foreach ($values_data as $v) {
+                if ($v['position'] === 'left') {
+                  echo nl2br(wp_kses_post($v['content']));
+                  break;
+                }
+              }
+              ?>
             </div>
           </div>
         </div>
