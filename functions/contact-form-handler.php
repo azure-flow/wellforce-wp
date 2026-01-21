@@ -139,19 +139,19 @@ function handle_contact_form_submission()
     $email_configs = [
         'en' => [
             'subject' => 'New Contact Form Submission - ' . get_bloginfo('name'),
-            'auto_reply_subject' => 'Thank you for contacting MIESCAPE',
+            'auto_reply_subject' => 'Thank you for contacting Wellforce',
             'language' => 'uni', // Unicode handles all languages (English, Japanese, Chinese, etc.)
-            'auto_reply_body' => 'Successfully sent your inquiry to Miescape.jp.'
+            'auto_reply_body' => 'Successfully sent your inquiry to Wellforce.jp.'
         ],
         'ja' => [
             'subject' => '新規お問い合わせフォーム送信 - ' . get_bloginfo('name'),
-            'auto_reply_subject' => 'MIESCAPEへのお問い合わせありがとうございます',
+            'auto_reply_subject' => 'Wellforceへのお問い合わせありがとうございます',
             'language' => 'uni', // Unicode handles all languages (English, Japanese, Chinese, etc.)
             'auto_reply_body' => 'お問い合わせを正常に送信いたしました。'
         ],
         'zh' => [
             'subject' => '新聯絡表單提交 - ' . get_bloginfo('name'),
-            'auto_reply_subject' => '感謝您聯絡MIESCAPE',
+            'auto_reply_subject' => '感謝您聯絡Wellforce',
             'language' => 'uni', // Unicode handles all languages (English, Japanese, Chinese, etc.)
             'auto_reply_body' => '您的詢問已成功發送。'
         ]

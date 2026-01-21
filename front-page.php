@@ -1,16 +1,65 @@
 <?php
 
 get_header();
+$args = array(
+    'post_type'      => 'homepage-cms',
+    'posts_per_page' => 1,
+    'orderby'        => 'date',
+    'order'          => 'ASC'
+);
+
+$query = new WP_Query($args);
+
+$first_homepage_cms_date = null;
+if ($query->have_posts()) {
+    $query->the_post();
+    $fv_gallery = get_field('top_gallery');
+}
+wp_reset_postdata();
 ?>
+
 <section class="overflow-hidden relative w-full h-[100vh]">
     <div
         class="absolute top-[67px] md:top-[120px] lg:top-[180px] xl:top-[220px] left-0 xl:left-[500px] fv-left-725 right-0 bottom-0"
         data-aos="fade-in"
         data-aos-delay="200">
-        <img
-            src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/fv_top.webp'); ?>"
-            alt="FV"
-            class="absolute top-0 left-0 right-0 bottom-0 w-full h-full object-cover" />
+        <?php
+        // Extract all image <img> tags from the WYSIWYG input for slider
+        $image_urls = [];
+        if (!empty($fv_gallery)) {
+            $dom = new DOMDocument();
+            libxml_use_internal_errors(true); // Suppress HTML5 tag warnings
+
+            // DOMDocument expects valid HTML, so wrap with <div>
+            $content = '<div>' . $fv_gallery . '</div>';
+
+            // Load without deprecated mb_convert_encoding
+            $dom->loadHTML('<?xml encoding="utf-8" ?>' . $content);
+
+            libxml_clear_errors();
+
+            $imgs = $dom->getElementsByTagName('img');
+
+            foreach ($imgs as $img) {
+                $src = $img->getAttribute('src');
+                if ($src) {
+                    $image_urls[] = $src;
+                }
+            }
+        }
+        ?>
+
+        <?php if (!empty($image_urls)): ?>
+            <div class="w-full h-full swiper swiper-fv">
+                <div class="swiper-wrapper">
+                    <?php foreach ($image_urls as $url): ?>
+                        <div class="swiper-slide">
+                            <img src="<?php echo esc_url($url); ?>" alt="FV" class="w-full h-full object-cover" loading="lazy" />
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
     <div
         class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center lg:justify-start w-[110%] md:w-[90%] lg:w-[95%] xl:w-full max-w-[1400px] md:mt-32">
@@ -22,7 +71,7 @@ get_header();
             </div>
             <div
                 class="text-[30px] md:text-[38px] lg:text-[44px] xl:text-[50px] font-gothic font-bold text-black whitespace-nowrap">
-                人が暮らしやすい街
+                暮らしやすい街
             </div>
             <div
                 class="px-[58px] md:px-0 text-[14px] md:text-[16px] lg:text-[17px] xl:text-[18px] text-left text-black leading-[1.4] font-medium">
@@ -60,6 +109,45 @@ get_header();
         </div>
     </div>
 </section>
+<section>
+    <div class="w-full h-full">
+        <?php
+        $content = get_field('top_gallery');
+
+        // Extract all image URLs from WYSIWYG content
+        $image_urls = [];
+
+        if ($content) {
+            $dom = new DOMDocument();
+            libxml_use_internal_errors(true); // Prevent HTML warnings
+            $dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
+            libxml_clear_errors();
+
+            $imgs = $dom->getElementsByTagName('img');
+
+            foreach ($imgs as $img) {
+                echo '<pre>';
+                // print_r($img);
+                echo '</pre>';
+            }
+            // foreach ($imgs as $img) {
+            //     $image_urls[] = $img->getAttribute('src');
+            // }
+        }
+        ?>
+        <!-- <div class="relative swiper-container experiences-swiper">
+            <?php if (!empty($image_urls)): ?>
+                <div class="swiper-wrapper aspect-[1.5] object-cover">
+                    <?php foreach ($image_urls as $url): ?>
+                        <div class="swiper-slide">
+                            <img loading="lazy" src="<?php echo esc_url($url); ?>" alt="" class="w-full h-full">
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </div> -->
+    </div>
+</section>
 
 <section
     class="w-full h-full min-h-[370px] flex items-center justify-center">
@@ -74,7 +162,8 @@ get_header();
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand01.webp'); ?>"
                                 alt="marquee01"
-                                class="w-full object-cover" />
+                                class="w-full object-cover"
+                                loading="lazy" />
                         </div>
                     </div>
                     <div class="swiper-slide">
@@ -83,7 +172,8 @@ get_header();
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand02.webp'); ?>"
                                 alt="marquee02"
-                                class="w-full object-cover" />
+                                class="w-full object-cover"
+                                loading="lazy" />
                         </div>
                     </div>
                     <div class="swiper-slide">
@@ -92,7 +182,8 @@ get_header();
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand03.webp'); ?>"
                                 alt="marquee03"
-                                class="w-full object-cover" />
+                                class="w-full object-cover"
+                                loading="lazy" />
                         </div>
                     </div>
                     <div class="swiper-slide">
@@ -101,11 +192,13 @@ get_header();
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand04.webp'); ?>"
                                 alt="marquee04"
-                                class="w-full object-cover hidden md:block" />
+                                class="w-full object-cover hidden md:block"
+                                loading="lazy" />
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand01.webp'); ?>"
                                 alt="marquee04"
-                                class="w-full object-cover block md:hidden" />
+                                class="w-full object-cover block md:hidden"
+                                loading="lazy" />
                         </div>
                     </div>
                     <div class="swiper-slide">
@@ -114,11 +207,13 @@ get_header();
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand05.webp'); ?>"
                                 alt="marquee05"
-                                class="w-full object-cover hidden md:block" />
+                                class="w-full object-cover hidden md:block"
+                                loading="lazy" />
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand02.webp'); ?>"
                                 alt="marquee05"
-                                class="w-full object-cover block md:hidden" />
+                                class="w-full object-cover block md:hidden"
+                                loading="lazy" />
                         </div>
                     </div>
                     <div class="swiper-slide">
@@ -127,11 +222,13 @@ get_header();
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand06.webp'); ?>"
                                 alt="marquee06"
-                                class="w-full object-cover hidden md:block" />
+                                class="w-full object-cover hidden md:block"
+                                loading="lazy" />
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand03.webp'); ?>"
                                 alt="marquee06"
-                                class="w-full object-cover block md:hidden" />
+                                class="w-full object-cover block md:hidden"
+                                loading="lazy" />
                         </div>
                     </div>
                     <div class="swiper-slide">
@@ -140,7 +237,8 @@ get_header();
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand01.webp'); ?>"
                                 alt="marquee01"
-                                class="w-full object-cover" />
+                                class="w-full object-cover"
+                                loading="lazy" />
                         </div>
                     </div>
                     <div class="swiper-slide">
@@ -149,7 +247,8 @@ get_header();
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand02.webp'); ?>"
                                 alt="marquee02"
-                                class="w-full object-cover" />
+                                class="w-full object-cover"
+                                loading="lazy" />
                         </div>
                     </div>
                     <div class="swiper-slide">
@@ -158,7 +257,8 @@ get_header();
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand03.webp'); ?>"
                                 alt="marquee03"
-                                class="w-full object-cover" />
+                                class="w-full object-cover"
+                                loading="lazy" />
                         </div>
                     </div>
                     <div class="swiper-slide">
@@ -167,11 +267,13 @@ get_header();
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand04.webp'); ?>"
                                 alt="marquee04"
-                                class="w-full object-cover hidden md:block" />
+                                class="w-full object-cover hidden md:block"
+                                loading="lazy" />
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand01.webp'); ?>"
                                 alt="marquee04"
-                                class="w-full object-cover block md:hidden" />
+                                class="w-full object-cover block md:hidden"
+                                loading="lazy" />
                         </div>
                     </div>
                     <div class="swiper-slide">
@@ -180,11 +282,13 @@ get_header();
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand05.webp'); ?>"
                                 alt="marquee05"
-                                class="w-full object-cover hidden md:block" />
+                                class="w-full object-cover hidden md:block"
+                                loading="lazy" />
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand02.webp'); ?>"
                                 alt="marquee05"
-                                class="w-full object-cover block md:hidden" />
+                                class="w-full object-cover block md:hidden"
+                                loading="lazy" />
                         </div>
                     </div>
                     <div class="swiper-slide">
@@ -193,11 +297,13 @@ get_header();
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand06.webp'); ?>"
                                 alt="marquee06"
-                                class="w-full object-cover hidden md:block" />
+                                class="w-full object-cover hidden md:block"
+                                loading="lazy" />
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand03.webp'); ?>"
                                 alt="marquee06"
-                                class="w-full object-cover block md:hidden" />
+                                class="w-full object-cover block md:hidden"
+                                loading="lazy" />
                         </div>
                     </div>
                 </div>
@@ -210,7 +316,8 @@ get_header();
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand04.webp'); ?>"
                                 alt="marquee04"
-                                class="w-full object-cover" />
+                                class="w-full object-cover"
+                                loading="lazy" />
                         </div>
                     </div>
                     <div class="swiper-slide">
@@ -219,7 +326,8 @@ get_header();
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand05.webp'); ?>"
                                 alt="marquee05"
-                                class="w-full object-cover" />
+                                class="w-full object-cover"
+                                loading="lazy" />
                         </div>
                     </div>
                     <div class="swiper-slide">
@@ -228,7 +336,8 @@ get_header();
                             <img
                                 src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/brand06.webp'); ?>"
                                 alt="marquee06"
-                                class="w-full object-cover" />
+                                class="w-full object-cover"
+                                loading="lazy" />
                         </div>
                     </div>
                 </div>
@@ -392,7 +501,8 @@ get_header();
                 <img
                     src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/video.webp'); ?>"
                     alt="地域ウェルビーイング"
-                    class="max-w-full max-h-[420px] rounded-[20px] bg-white object-contain" />
+                    class="max-w-full max-h-[420px] rounded-[20px] bg-white object-contain"
+                    loading="lazy" />
             </div>
             <a
                 href="<?php echo esc_url(home_url('/concept/')); ?>"
@@ -512,7 +622,8 @@ get_header();
                                         <img
                                             src="<?php echo $post_image; ?>"
                                             alt="<?php echo $post_title; ?>"
-                                            class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px] group-hover:scale-105 duration-200" />
+                                            class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px] group-hover:scale-105 duration-200"
+                                            loading="lazy" />
                                     </div>
                                     <div
                                         class="px-6 xl:p-10 flex-1 w-full h-2/5 md:h-12/30 flex flex-col justify-start pt-8 md:pt-10 lg:pt-6 xl:pt-10">
@@ -617,7 +728,8 @@ get_header();
                                                 <img
                                                     src="<?php echo $post_image; ?>"
                                                     alt="<?php echo $post_title; ?>"
-                                                    class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px] group-hover:scale-105 duration-200" />
+                                                    class="w-full aspect-[1] md:aspect-[7/6] object-cover rounded-[20px] group-hover:scale-105 duration-200"
+                                                    loading="lazy" />
                                             </div>
                                         </div>
                                         <div

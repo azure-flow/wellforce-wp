@@ -37,7 +37,7 @@
                 <div class="w-full h-full ove">
                     <p
                         class="text-black text-[12px] md:text-[13px] lg:text-[14px] xl:text-[16px] leading-[2.4]">
-                        <?php echo $post_content; ?>
+                        <?php echo nl2br($post_content); ?>
                     </p>
                 </div>
             </div>

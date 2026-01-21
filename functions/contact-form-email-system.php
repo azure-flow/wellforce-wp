@@ -33,7 +33,7 @@ class ContactFormEmailSystem
         // Set default configuration
         $default_config = [
             'subject' => '新規お問い合わせフォーム送信',
-            'from_name' => 'Miescape.jp',
+            'from_name' => 'Wellforce.jp',
             'from_email' => $recipient_email,
             'timezone' => 'Asia/Tokyo',
             'language' => 'Japanese'
@@ -99,11 +99,11 @@ class ContactFormEmailSystem
         $default_config = [
             'subject' => 'Thank you for your inquiry',
             'auto_reply_subject' => 'Thank you for your inquiry', // Separate subject for auto-reply
-            'from_name' => 'Miescape.jp',
+            'from_name' => 'Wellforce.jp',
             'from_email' => $recipient_email,
             'timezone' => 'Asia/Tokyo',
             'language' => 'English',
-            'company_name' => 'Miescape.jp',
+            'company_name' => 'Wellforce.jp',
             'company_address' => '',
             'company_tel' => '',
             'company_fax' => ''
@@ -120,7 +120,7 @@ class ContactFormEmailSystem
         $subject = isset($config['auto_reply_subject']) ? $config['auto_reply_subject'] : $config['subject'];
 
         // Build simple success message only (use language-specific message if provided)
-        $body = isset($config['auto_reply_body']) ? $config['auto_reply_body'] : "Successfully sent your inquiry to Miescape.jp.";
+        $body = isset($config['auto_reply_body']) ? $config['auto_reply_body'] : "Successfully sent your inquiry to Wellforce.jp.";
 
         // Set email headers
         $headers = [];

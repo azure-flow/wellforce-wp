@@ -134,32 +134,39 @@
         data-is-single-news="<?php echo (is_singular('news')) ? 'true' : 'false'; ?>"
         class="fixed max-w-[1400px] md:left-1/2 md:-translate-x-1/2 top-0 md:top-4 lg:top-6 xl:top-8 w-full md:w-[90%] lg:w-[95%] xl:w-full top-0 z-50 bg-white hover:bg-[#e2f5ffb3] transition-colors duration-200 rounded-none md:rounded-[20px]">
         <div
-            class="max-w-[1440px] w-full flex flex-row justify-between items-center px-5 md:px-12 lg:px-20 xl:px-32 py-3 lg:py-4 xl:py-6">
+            class="max-w-[1440px] w-full flex flex-row justify-between items-center px-5 md:px-12 lg:px-20 xl:px-32 py-3 md:py-5 lg:py-7 xl:py-9">
             <a
                 href="<?php echo home_url(); ?>"
                 class="flex items-center gap-3 cursor-pointer select-none">
                 <div
                     class="relative flex md:flex-col gap-2 md:gap-1 lg:gap-2 xl:gap-3 items-center justify-center">
                     <img
+                        src="<?php echo T_DIRE_URI; ?>/assets/images/logo_h.png"
+                        alt="Wellforse Logo"
+                        class="hidden md:block w-[70px] md:w-[60px] lg:w-[90px] xl:w-[100px] object-contain" />
+                    <img
                         src="<?php echo T_DIRE_URI; ?>/assets/images/logo.png"
                         alt="Wellforse Logo"
-                        class="w-[70px] md:w-[60px] lg:w-[90px] xl:w-[100px] object-contain" />
+                        class="block md:hidden w-[70px] md:w-[60px] lg:w-[90px] xl:w-[100px] object-contain" />
                     <div
-                        class="font-gothic text-black text-[12px] md:text-[14px] lg:text-[16px] font-bold tracking-[3px]">
-                        <span class="text-[#28A8E0]">Well</span>forse
+                        class="block md:hidden font-gothic text-black text-[12px] md:text-[14px] lg:text-[16px] font-bold tracking-[3px]">
+                        <span class="text-[#28A8E0]">Well</span>force
                     </div>
                 </div>
             </a>
             <nav
                 class="hidden md:flex flex-col gap-[2px] md:gap-1 lg:gap-2 xl:gap-3">
                 <div class="grid grid-cols-4 gap-6 lg:gap-8 xl:gap-10 justify-end">
-                    <span class="col-span-2 flex justify-end">
-                        <a
-                            href="<?php echo home_url('/company'); ?>"
-                            class="text-black text-[13px] lg:text-[14px] xl:text-[16px] text-right font-medium hover:text-[#28A8E0] transition-colors duration-200">
-                            会社概要
-                        </a>
-                    </span>
+                    <a
+                        href="<?php echo home_url('/'); ?>"
+                        class="text-black text-[13px] lg:text-[14px] xl:text-[16px] text-right font-medium hover:text-[#28A8E0] transition-colors duration-200">
+                        トップページ
+                    </a>
+                    <a
+                        href="<?php echo home_url('/company'); ?>"
+                        class="text-black text-[13px] lg:text-[14px] xl:text-[16px] text-right font-medium hover:text-[#28A8E0] transition-colors duration-200">
+                        会社概要
+                    </a>
                     <a
                         href="<?php echo home_url('/concept'); ?>"
                         class="text-black text-[13px] lg:text-[14px] xl:text-[16px] text-right font-medium hover:text-[#28A8E0] transition-colors duration-200">

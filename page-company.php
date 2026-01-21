@@ -1,6 +1,35 @@
 <?php
 
 get_header();
+
+$args = array(
+    'post_type'      => 'homepage-cms',
+    'posts_per_page' => 1,
+    'orderby'        => 'date',
+    'order'          => 'ASC'
+);
+
+$query = new WP_Query($args);
+
+$company_name    = '';
+$company_address = '';
+$business_purpose  = '';
+$company_capital = '';
+$company_social  = '';
+$company_birth   = '';
+$homepage_url    = '';
+
+if ($query->have_posts()) {
+    $query->the_post();
+    $company_name    = get_field('company_name');
+    $company_address = get_field('company_address');
+    $business_purpose  = get_field('business_purpose');
+    $company_capital = get_field('company_capital');
+    $company_social  = get_field('company_social');
+    $company_birth   = get_field('company_birth');
+    $homepage_url    = get_field('homepage_url');
+}
+wp_reset_postdata();
 ?>
 
 <section
@@ -42,27 +71,27 @@ get_header();
       <div
         class="flex flex-col md:flex-row gap-1 md:gap-0 border-b border-y-[.5px] py-3 md:py-5 lg:py-6 xl:py-8 px-[27px] md:pl-[44px] lg:pl-[56px] xl:pl-[72px] border-black text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px]">
         <div class="md:w-[126px] lg:w-[148px] xl:w-[170px]">社名</div>
-        <div class="">株式会社ウエルフォース</div>
+        <div class=""><?php echo $company_name; ?></div>
       </div>
       <div
         class="flex flex-col md:flex-row gap-1 md:gap-0 border-b border-b-[.5px] py-3 md:py-5 lg:py-6 xl:py-8 px-[27px] md:pl-[44px] lg:pl-[56px] xl:pl-[72px] border-black text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px]">
         <div class="md:w-[126px] lg:w-[148px] xl:w-[170px]">住所</div>
-        <div class="">〒577-0000 大阪府東大阪市中小阪2丁目</div>
+        <div class=""><?php echo $company_address; ?></div>
       </div>
       <div
         class="flex flex-col md:flex-row gap-1 md:gap-0 border-b border-b-[.5px] py-3 md:py-5 lg:py-6 xl:py-8 px-[27px] md:pl-[44px] lg:pl-[56px] xl:pl-[72px] border-black text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px]">
         <div class="md:w-[126px] lg:w-[148px] xl:w-[170px]">事業目的</div>
-        <div class="">快適な暮らし、確かな信頼。あなたの新しいホーム。</div>
+        <div class=""><?php echo $business_purpose; ?></div>
       </div>
       <div
         class="flex flex-col md:flex-row gap-1 md:gap-0 border-b border-b-[.5px] py-3 md:py-5 lg:py-6 xl:py-8 px-[27px] md:pl-[44px] lg:pl-[56px] xl:pl-[72px] border-black text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px]">
         <div class="md:w-[126px] lg:w-[148px] xl:w-[170px]">資本金</div>
-        <div class="">300万円</div>
+        <div class=""><?php echo $company_capital; ?></div>
       </div>
       <div
         class="flex flex-col md:flex-row gap-1 md:gap-0 border-b border-b-[.5px] py-3 md:py-5 lg:py-6 xl:py-8 px-[27px] md:pl-[44px] lg:pl-[56px] xl:pl-[72px] border-black text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px]">
         <div class="md:w-[126px] lg:w-[148px] xl:w-[170px]">設立日</div>
-        <div class="">2007年5月1日</div>
+        <div class=""><?php echo $company_birth; ?></div>
       </div>
       <div
         class="flex flex-col md:flex-row gap-1 md:gap-0 border-b border-b-[.5px] py-3 md:py-5 lg:py-6 xl:py-8 px-[27px] md:pl-[44px] lg:pl-[56px] xl:pl-[72px] border-black text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px]">
@@ -70,13 +99,8 @@ get_header();
           ホームページ
         </div>
         <div class="">
-          <a href="http://www.wellforse.jp/" target="_blank">https://www.wellforce.jp/</a>
+          <a href="<?php echo $homepage_url; ?>" target="_blank"><?php echo $homepage_url; ?></a>
         </div>
-      </div>
-      <div
-        class="flex flex-col md:flex-row gap-1 md:gap-0 border-b border-b-[.5px] py-3 md:py-5 lg:py-6 xl:py-8 px-[27px] md:pl-[44px] lg:pl-[56px] xl:pl-[72px] border-black text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px]">
-        <div class="md:w-[126px] lg:w-[148px] xl:w-[170px]">メール</div>
-        <div class="">info@wellforce.jp</div>
       </div>
     </div>
   </div>
@@ -154,7 +178,7 @@ get_header();
             class="absolute inset-0 opacity-0 pointer-events-none transition-opacity duration-500">
             <video
               id="fast-video-01"
-              src="<?php echo get_template_directory_uri(); ?>/assets/videos/猫と暮らす未来型賃貸住宅.mp4"
+              src="<?php echo get_template_directory_uri(); ?>/assets/videos/生成AIコミュニティ.mp4"
               alt="賃貸住宅の外観と入居者イメージ"
               class="w-full aspect-[1.17]"
               muted
@@ -214,7 +238,7 @@ get_header();
             class="absolute inset-0 opacity-0 pointer-events-none transition-opacity duration-500">
             <video
               id="fast-video-02"
-              src="<?php echo get_template_directory_uri(); ?>/assets/videos/生成AIコミュニティ.mp4"
+              src="<?php echo get_template_directory_uri(); ?>/assets/videos/猫と暮らす未来型賃貸住宅.mp4"
               alt="賃貸住宅の外観と入居者イメージ"
               class="w-full aspect-[1.17]"
               muted

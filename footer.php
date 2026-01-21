@@ -93,11 +93,6 @@
                   >住所 ：東大阪市中小阪2丁目</span
                 >
               </li>
-              <li>
-                <span class="text-[12px] md:text-[14px] lg:text-[16px] font-300"
-                  >メール：info@wellforce.jp</span
-                >
-              </li>
             </ul>
           </div>
           <div class="w-full md:w-1/4 md:mb-0">

@@ -65,50 +65,64 @@ if (!$post_categories) {
           class="w-full aspect-[1.5] object-cover rounded-[20px]" />
         <p
           class="text-[14px] md:text-[16px] lg:text-[14px] xl:text-[16px] leading-[2.2]">
-          <?php echo $post_content; ?>
+          <?php echo nl2br($post_content); ?>
         </p>
       </div>
 
       <div class="w-full lg:w-[38%] flex flex-col gap-3 xl:gap-4">
         <?php
-        // Custom: gather previous 2 and next 2 announcements (excluding current)
-        global $post;
+        // Custom: gather related announcements with wrap-around logic
         $current_post_id = get_the_ID();
 
         // Fetch all announcements in date order
-        $all_args = array(
+        $all_announcements = get_posts(array(
           'post_type'      => 'announcement',
           'posts_per_page' => -1,
           'orderby'        => 'date',
           'order'          => 'DESC',
           'fields'         => 'ids',
-        );
-        $all_announcements = get_posts($all_args);
+        ));
 
-        // Find current post's index in this sorted list
-        $current_index = array_search($current_post_id, $all_announcements);
+        $total_count = count($all_announcements);
+        if ($total_count < 2) {
+          $show_ids = array();
+        } else {
+          $current_index = array_search($current_post_id, $all_announcements);
 
-        // Get prev 2 and next 2 IDs
-        $show_ids = [];
-
-        // Previous two (before current, in DESC order, so lower index = "later" date)
-        for ($i = $current_index - 2; $i < $current_index; $i++) {
-          if ($i >= 0 && isset($all_announcements[$i])) {
-            $show_ids[] = $all_announcements[$i];
+          if ($current_index === false) {
+            $show_ids = array_slice($all_announcements, 0, 4);
+          } elseif ($current_index === 0) {
+            // First item: last 2 + next 2
+            $show_ids = array_merge(
+              array_slice($all_announcements, -2),
+              array_slice($all_announcements, 1, 2)
+            );
+          } elseif ($current_index === 1) {
+            // Second item: last 1 + first 1 + next 2
+            $show_ids = array_merge(
+              array_slice($all_announcements, -1),
+              array_slice($all_announcements, 0, 1),
+              array_slice($all_announcements, 2, 2)
+            );
+          } elseif ($current_index === $total_count - 1) {
+            // Last item: previous 2 + first 2
+            $show_ids = array_merge(
+              array_slice($all_announcements, $current_index - 2, 2),
+              array_slice($all_announcements, 0, 2)
+            );
+          } else {
+            // Middle items: previous 2 + next 2
+            $show_ids = array_merge(
+              array_slice($all_announcements, $current_index - 2, 2),
+              array_slice($all_announcements, $current_index + 1, 2),
+              array_slice($all_announcements, 0, 1)
+            );
           }
-        }
 
-        // Next two (after current, higher index = "older" date in DESC)
-        for ($i = $current_index + 1; $i <= $current_index + 2; $i++) {
-          if (isset($all_announcements[$i])) {
-            $show_ids[] = $all_announcements[$i];
-          }
+          // Remove current post and limit to 4
+          $show_ids = array_diff($show_ids, array($current_post_id));
+          $show_ids = array_slice(array_values($show_ids), 0, 4);
         }
-
-        // Remove current post (should not be in $show_ids, but just in case)
-        $show_ids = array_diff($show_ids, [$current_post_id]);
-        // Limit to max 4 as expected
-        $show_ids = array_slice($show_ids, 0, 4);
 
         if (!empty($show_ids)) :
           $side_query = new WP_Query(array(
@@ -142,7 +156,7 @@ if (!$post_categories) {
                 </div>
                 <p
                   class="text-[14px] md:text-[14px] lg:text-[12px] xl:text-[16px] leading-relaxed xl:leading-[2] line-clamp-2">
-                  <?php echo esc_html($related_content); ?>
+                  <?php echo $related_content; ?>
                 </p>
               </div>
             </a>

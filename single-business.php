@@ -55,7 +55,7 @@ $post_content = get_field('content');
           class="w-full aspect-[1.5] object-cover rounded-[20px]" />
         <p
           class="text-[14px] md:text-[16px] lg:text-[14px] xl:text-[16px] leading-[2.2]">
-          <?php echo $post_content; ?>
+          <?php echo nl2br($post_content); ?>
         </p>
       </div>
 
