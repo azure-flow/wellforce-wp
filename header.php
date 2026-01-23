@@ -145,13 +145,9 @@
                         alt="Wellforse Logo"
                         class="hidden md:block w-[70px] md:w-[60px] lg:w-[90px] xl:w-[100px] object-contain" />
                     <img
-                        src="<?php echo T_DIRE_URI; ?>/assets/images/logo.png"
+                        src="<?php echo T_DIRE_URI; ?>/assets/images/logo_sp.png"
                         alt="Wellforse Logo"
-                        class="block md:hidden w-[70px] md:w-[60px] lg:w-[90px] xl:w-[100px] object-contain" />
-                    <div
-                        class="block md:hidden font-gothic text-black text-[12px] md:text-[14px] lg:text-[16px] font-bold tracking-[3px]">
-                        <span class="text-[#28A8E0]">Well</span>force
-                    </div>
+                        class="block md:hidden w-[150px] object-contain" />
                 </div>
             </a>
             <nav

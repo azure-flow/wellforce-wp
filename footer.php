@@ -8,15 +8,12 @@
           >
             <a href="<?php echo home_url(); ?>">
               <img
-                src="<?php echo T_DIRE_URI; ?>/assets/images/logo.png"
+                src="<?php echo T_DIRE_URI; ?>/assets/images/logo_h.png"
                 alt="Wellforce logo"
-                class="mb-3 w-[100px]"
+                class="w-[100px] mb-10"
                 style="filter: brightness(0) invert(1)"
               />
             </a>
-            <span class="text-white font-medium text-[30px] mb-5"
-              >Wellforce</span
-            >
           </div>
           <div class="w-full md:w-1/4 flex flex-col items-start mb-8 md:mb-0">
             <span class="font-bold mb-8 text-[16px] md:text-[18px]"
@@ -171,12 +168,11 @@
           class="w-full md:w-1/6 flex flex-col items-center md:items-start mb-12 md:mb-0"
         >
           <img
-            src="<?php echo T_DIRE_URI; ?>/assets/images/logo.png"
+            src="<?php echo T_DIRE_URI; ?>/assets/images/logo_h.png"
             alt="Wellforce logo"
-            class="mb-3 w-[90px]"
+            class="mb-3 w-[100px]"
             style="filter: brightness(0) invert(1)"
           />
-          <span class="text-white font-medium text-[24px] mb-5">Wellforce</span>
         </div>
         <nav class="flex flex-col gap-[2px]">
           <div class="grid grid-cols-2 gap-y-10 gap-x-20 justify-start">

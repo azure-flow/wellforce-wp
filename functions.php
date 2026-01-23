@@ -79,3 +79,43 @@ function ajax_load_more_news() {
 }
 add_action('wp_ajax_load_more_news', 'ajax_load_more_news');
 add_action('wp_ajax_nopriv_load_more_news', 'ajax_load_more_news');
+
+
+// Contact Form Handler
+
+add_action('init', 'wellforce_handle_contact_form');
+
+function wellforce_handle_contact_form() {
+
+    if (!isset($_POST['contact_form'])) {
+        return;
+    }
+
+    // Security (recommended)
+    if (!wp_verify_nonce($_POST['_wpnonce'] ?? '', 'contact_nonce')) {
+        return;
+    }
+
+    $name    = sanitize_text_field($_POST['name']);
+    $email   = sanitize_email($_POST['email']);
+    $message = sanitize_textarea_field($_POST['message']);
+
+    $to = 'info@wellforce.jp';
+    $subject = 'お問い合わせが届きました';
+
+    $headers = [
+        'Content-Type: text/html; charset=UTF-8',
+        'From: Wellforce <info@wellforce.jp>',
+        'Reply-To: ' . $email
+    ];
+
+    $body = "
+        <strong>お名前:</strong> {$name}<br>
+        <strong>メール:</strong> {$email}<br><br>
+        <strong>内容:</strong><br>
+        {$message}
+    ";
+
+    wp_mail($to, $subject, $body, $headers);
+}
+

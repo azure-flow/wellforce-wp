@@ -1,6 +1,42 @@
 <?php
-
 get_header();
+
+/**
+ * Load map items from the Area Map Manager plugin (ACF-powered).
+ */
+$amm_map_items = [];
+
+if (function_exists('get_field')) {
+  $amm_posts = get_posts([
+    'post_type'   => 'map_item',
+    'numberposts' => -1,
+    'post_status' => 'publish',
+    'orderby'     => 'date',
+    'order'       => 'DESC',
+  ]);
+
+  foreach ($amm_posts as $p) {
+    $image_url = get_field('image', $p->ID);
+    
+    // ACF returns image URL directly, ensure it's a string
+    if (!is_string($image_url)) {
+      $image_url = '';
+    }
+
+    $amm_map_items[] = [
+      'id'        => $p->ID,
+      'title'     => $p->post_title,
+      'x'         => (float) get_field('map_x', $p->ID),
+      'y'         => (float) get_field('map_y', $p->ID),
+      'desc'      => (string) get_field('description', $p->ID),
+      'imageUrl'  => $image_url ? esc_url($image_url) : '',
+      'event'     => (int) get_field('event_on', $p->ID),
+      'start'     => (string) get_field('event_start', $p->ID),
+      'end'       => (string) get_field('event_end', $p->ID),
+      'highlight' => (string) get_field('highlight_area', $p->ID),
+    ];
+  }
+}
 ?>
 
 <section
@@ -49,11 +85,19 @@ get_header();
     </div>
     <div
       class="w-full flex flex-col flex-1 justify-center items-start overflow-auto">
-      <div id="openModalBtn" class="w-[600px] md:w-full h-full overflow-hidden">
+      <div
+        id="serviceMapContainer"
+        class="w-[600px] md:w-full h-full overflow-hidden relative rounded-[12px] shadow-lg">
         <img
+          id="serviceMapImage"
           src="<?php echo get_template_directory_uri(); ?>/assets/images/map.webp"
           alt="map"
-          class="w-full h-full object-cover" />
+          class="w-full h-full object-cover select-none" />
+        <div
+          id="serviceMapLayers"
+          class="absolute inset-0 pointer-events-none">
+          <div id="serviceMapMarkers" class="absolute inset-0 pointer-events-none"></div>
+        </div>
       </div>
     </div>
     <a
@@ -88,11 +132,12 @@ get_header();
   id="infoModal"
   class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-8">
   <div
-    class="bg-white w-full max-w-[320px] md:max-w-[540px] lg:max-w-[800px] xl:max-w-[1000px] max-h-[800px] md:max-h-[800px] flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300">
+    class="bg-white w-full max-w-[320px] md:max-w-[540px] lg:max-w-[800px] xl:max-w-[1000px] max-h-[800px] md:max-h-[800px] flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300"
+    data-modal-card>
     <!-- Header -->
     <div
       class="bg-[#28A8E0] text-white px-6 lg:px-8 xl:px-10 py-6 lg:py-8 xl:py-10 flex items-center justify-between">
-      <h3 class="text-[16px] md:text-[18px] lg:text-[20px] xl:text-[26px] font-medium">情報ウインド</h3>
+      <h3 id="modalTitle" class="text-[16px] md:text-[18px] lg:text-[20px] xl:text-[26px] font-medium">情報ウインド</h3>
       <button
         id="closeModalBtn"
         class="w-6 md:w-10 lg:w-12 aspect-[1] flex items-center justify-center bg-white hover:bg-white/20 group transition-colors duration-200"
@@ -117,10 +162,12 @@ get_header();
       <div class="mb-6 md:mb-8">
         <div class="flex flex-col md:flex-row md:items-end md:gap-4 mb-4">
           <h2
+            id="modalHeading"
             class="text-[24px] md:text-[32px] lg:text-[36px] xl:text-[40px] font-bold text-black mb-2 md:mb-0">
             イベント名
           </h2>
           <span
+            id="modalDate"
             class="text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px] text-black pb-1 lg:pb-2">
             2026.3~2026.4
           </span>
@@ -131,30 +178,133 @@ get_header();
       <div
         class="gap-6 md:gap-8 lg:gap-10 mb-6 md:mb-8">
         <img
-          src="<?php echo get_template_directory_uri(); ?>/assets/images/bis01.webp"
-          alt="賃貸住宅の外観"
-          class="w-full lg:w-[300px] xl:w-[375px] float-left h-auto rounded-[15px] lg:rounded-[20px] object-cover mb-4 md:mb-8 lg:mb-0 mr-5 lg:mr-12 xl:mr-16" />
+          id="modalImage"
+          src=""
+          alt=""
+          class="w-full lg:w-[300px] xl:w-[375px] float-left h-auto rounded-[15px] lg:rounded-[20px] object-cover mb-4 md:mb-8 lg:mb-0 mr-5 lg:mr-12 xl:mr-16 hidden" />
         <p
-          class="text-[14px] md:text-[16px] lg:text-[16px] xl:text-[20px] text-black leading-[1.8] md:leading-[2]">
-          東大阪市八戸ノ里エリアを中心に、積水ハウスやパナソニックホームズの高性能賃貸住宅を経営・運営しています。耐震性・断熱性・遮音性といった住宅性能はもちろん、長期的に安心して暮らせる住環境づくりを重視してきました。
-          東大阪市八戸ノ里エリアを中心に、積水ハウスやパナソニックホームズの高性能賃貸住宅を経営・運営しています。耐震性・断熱性・遮音性といった住宅性能はもちろん、長期的に安心して暮らせる住環境づくりを重視してきました。
-          東大阪市八戸ノ里エリアを中心に、積水ハウスやパナソニックホームズの高性能賃貸住宅を経営・運営しています。耐震性・断熱性・遮音性といった住宅性能はもちろん、長期的に安心して暮らせる住環境づくりを重視してきました。
-          東大阪市八戸ノ里エリアを中心に、積水ハウスやパナソニックホームズの高性能賃貸住宅を経営・運営しています。耐震性・断熱性・遮音性といった住宅性能はもちろん、長期的に安心して暮らせる住環境づくりを重視してきました。
-          東大阪市八戸ノ里エリアを中心に、積水ハウスやパナソニックホームズの高性能賃貸住宅を経営・運営しています。耐震性・断熱性・遮音性といった住宅性能はもちろん、長期的に安心して暮らせる住環境づくりを重視してきました。
-          東大阪市八戸ノ里エリアを中心に、積水ハウスやパナソニックホームズの高性能賃貸住宅を経営・運営しています。耐震性・断熱性・遮音性といった住宅性能はもちろん、長期的に安心して暮らせる住環境づくりを重視してきました。
-          東大阪市八戸ノ里エリアを中心に、積水ハウスやパナソニックホームズの高性能賃貸住宅を経営・運営しています。耐震性・断熱性・遮音性といった住宅性能はもちろん、長期的に安心して暮らせる住環境づくりを重視してきました。
-          東大阪市八戸ノ里エリアを中心に、積水ハウスやパナソニックホームズの高性能賃貸住宅を経営・運営しています。耐震性・断熱性・遮音性といった住宅性能はもちろん、長期的に安心して暮らせる住環境づくりを重視してきました。
-          東大阪市八戸ノ里エリアを中心に、積水ハウスやパナソニックホームズの高性能賃貸住宅を経営・運営しています。耐震性・断熱性・遮音性といった住宅性能はもちろん、長期的に安心して暮らせる住環境づくりを重視してきました。
-          東大阪市八戸ノ里エリアを中心に、積水ハウスやパナソニックホームズの高性能賃貸住宅を経営・運営しています。耐震性・断熱性・遮音性といった住宅性能はもちろん、長期的に安心して暮らせる住環境づくりを重視してきました。
-          東大阪市八戸ノ里エリアを中心に、積水ハウスやパナソニックホームズの高性能賃貸住宅を経営・運営しています。耐震性・断熱性・遮音性といった住宅性能はもちろん、長期的に安心して暮らせる住環境づくりを重視してきました。
-          東大阪市八戸ノ里エリアを中心に、積水ハウスやパナソニックホームズの高性能賃貸住宅を経営・運営しています。耐震性・断熱性・遮音性といった住宅性能はもちろん、長期的に安心して暮らせる住環境づくりを重視してきました。
-          東大阪市八戸ノ里エリアを中心に、積水ハウスやパナソニックホームズの高性能賃貸住宅を経営・運営しています。耐震性・断熱性・遮音性といった住宅性能はもちろん、長期的に安心して暮らせる住環境づくりを重視してきました。
-          東大阪市八戸ノ里エリアを中心に、積水ハウスやパナソニックホームズの高性能賃貸住宅を経営・運営しています。耐震性・断熱性・遮音性といった住宅性能はもちろん、長期的に安心して暮らせる住環境づくりを重視してきました。
+          id="modalDesc"
+          class="text-[14px] md:text-[16px] lg:text-[16px] xl:text-[20px] text-black leading-[1.8] md:leading-[2] whitespace-pre-line">
+          施設の説明がここに入ります。
         </p>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  /* Simple map overlay styling for frontend */
+  .amm-front-marker {
+    position: absolute;
+    margin-top: -5px;
+    width: 22px;
+    height: 22px;
+    background: rgb(196, 29, 18);
+    border-radius: 50% 50% 50% 0;
+    transform: translate(-50%, -100%) rotate(-45deg);
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    pointer-events: auto;
+    transition: background-color 0.3s ease;
+  }
+
+  .amm-front-marker:hover{
+    background-color: #28A8E0;
+  }
+
+  .amm-front-marker::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    margin: 6px 0 0 6px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+</style>
+
+<script>
+  (function () {
+    const items = <?php echo wp_json_encode($amm_map_items); ?> || [];
+    console.log('All map items:', items);
+    const markersLayer = document.getElementById('serviceMapMarkers');
+    const modal = document.getElementById('infoModal');
+    const modalCard = modal ? modal.querySelector('[data-modal-card]') : null;
+    const modalHeading = document.getElementById('modalHeading');
+    const modalDate = document.getElementById('modalDate');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalImage = document.getElementById('modalImage');
+
+    if (!markersLayer) return;
+
+    const formatDateRange = (start, end) => {
+      if (!start && !end) return '';
+      if (start && end) return `${start.replace(/-/g, '.')} ~ ${end.replace(/-/g, '.')}`;
+      return (start || end || '').replace(/-/g, '.');
+    };
+
+    const openModal = (item) => {
+      if (!modal || !modalCard) return;
+      console.log('Opening modal for item:', item);
+      
+      modalHeading.textContent = item.title || '情報';
+      modalDate.textContent = formatDateRange(item.start, item.end) || '日付未設定';
+      modalDesc.textContent = item.desc || '説明が登録されていません。';
+
+      // Handle image
+      if (item.imageUrl && typeof item.imageUrl === 'string' && item.imageUrl.trim() !== '') {
+        console.log('Setting image URL:', item.imageUrl);
+        modalImage.src = item.imageUrl;
+        modalImage.alt = item.title || '画像';
+        modalImage.classList.remove('hidden');
+        modalImage.onerror = function() {
+          console.error('Failed to load image:', item.imageUrl);
+          this.classList.add('hidden');
+        };
+      } else {
+        console.log('No image URL for item:', item.title);
+        modalImage.classList.add('hidden');
+      }
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modalCard.classList.remove('scale-95');
+      modalCard.classList.add('scale-100');
+    };
+
+    const closeModal = () => {
+      if (!modal || !modalCard) return;
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modalCard.classList.add('scale-95');
+      modalCard.classList.remove('scale-100');
+    };
+
+    document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    items.forEach((item) => {
+      if (item.x === null || item.y === null || item.x === '' || item.y === '') return;
+
+      const marker = document.createElement('button');
+      marker.type = 'button';
+      marker.className = 'amm-front-marker';
+      marker.style.left = `${item.x}%`;
+      marker.style.top = `${item.y}%`;
+      marker.title = item.title || '地点';
+      marker.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openModal(item);
+      });
+      markersLayer.appendChild(marker);
+    });
+  })();
+</script>
 
 <?php
 get_footer();
