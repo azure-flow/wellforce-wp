@@ -119,3 +119,32 @@ function wellforce_handle_contact_form() {
     wp_mail($to, $subject, $body, $headers);
 }
 
+/**
+ * Convert URLs in text to clickable links
+ * Works with both plain text and HTML (preserves <br> tags from nl2br)
+ */
+if (!function_exists('linkify_text')) {
+  function linkify_text($text) {
+    if (empty($text)) return '';
+    
+    // URL regex pattern (matches http://, https://, and www.)
+    // Excludes URLs that are already inside <a> tags
+    $url_pattern = '/(?<!["\'>])(https?:\/\/[^\s<>]+|www\.[^\s<>]+)(?![^<]*<\/a>)/i';
+    
+    // Replace URLs with clickable links
+    $text = preg_replace_callback($url_pattern, function($matches) {
+      $url = trim($matches[0]);
+      $display_url = $url;
+      
+      // Add http:// if it starts with www.
+      if (preg_match('/^www\./i', $url)) {
+        $url = 'http://' . $url;
+      }
+      
+      return '<a href="' . esc_url($url) . '" target="_blank" rel="noopener noreferrer" class="text-[#28A8E0] hover:underline">' . esc_html($display_url) . '</a>';
+    }, $text);
+    
+    return $text;
+  }
+}
+

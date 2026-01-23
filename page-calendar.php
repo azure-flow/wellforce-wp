@@ -635,6 +635,42 @@ if (!function_exists('getShortTitle')) {
       return title.length > num ? title.substring(0, num) + '...' : title;
     };
 
+    // Convert URLs in text to clickable links
+    const linkifyText = (text) => {
+      if (!text) return '';
+      
+      // Escape HTML to prevent XSS
+      const escapeHtml = (str) => {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      };
+      
+      // URL regex pattern (matches http://, https://, and www.)
+      const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+)/gi;
+      
+      // Split text by URLs and process each part
+      const parts = text.split(urlRegex);
+      let result = '';
+      
+      parts.forEach((part) => {
+        if (urlRegex.test(part)) {
+          // It's a URL - make it a link
+          let url = part;
+          // Add http:// if it starts with www.
+          if (url.startsWith('www.')) {
+            url = 'http://' + url;
+          }
+          result += `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="text-[#28A8E0] hover:underline">${escapeHtml(part)}</a>`;
+        } else {
+          // Regular text - escape and preserve line breaks
+          result += escapeHtml(part).replace(/\n/g, '<br>');
+        }
+      });
+      
+      return result;
+    };
+
 
     const openModal = (month, itemIdToShow = null) => {
       if (!modal || !modalCard) return;
@@ -794,7 +830,7 @@ if (!function_exists('getShortTitle')) {
         eventDate.classList.remove('hidden');
       }
       if (eventDesc) {
-        eventDesc.textContent = item.desc || '説明が登録されていません。';
+        eventDesc.innerHTML = linkifyText(item.desc || '説明が登録されていません。');
         eventDesc.classList.remove('hidden');
       }
 
