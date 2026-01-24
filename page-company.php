@@ -30,6 +30,7 @@ $video_2   = '';
 $title_2   = '';
 $content_2 = '';
 $image_3   = '';
+$video_3   = '';
 $title_3   = '';
 $content_3 = '';
 
@@ -54,6 +55,7 @@ if ($query->have_posts()) {
   $title_2   = get_field('title_2');
   $content_2 = get_field('content_2');
   $image_3   = get_field('image_3');
+  $video_3   = get_field('video_3');
   $title_3   = get_field('title_3');
   $content_3 = get_field('content_3');
 }
@@ -208,7 +210,6 @@ wp_reset_postdata();
               src="<?php echo $video_1; ?>"
               alt="賃貸住宅の外観と入居者イメージ"
               class="w-full aspect-[1.17]"
-              muted
               loop></video>
             <!-- Play button on video center -->
             <button
@@ -268,7 +269,6 @@ wp_reset_postdata();
               src="<?php echo $video_2; ?>"
               alt="賃貸住宅の外観と入居者イメージ"
               class="w-full aspect-[1.17]"
-              muted
               loop></video>
             <!-- Play button on video center -->
             <button
@@ -340,11 +340,48 @@ wp_reset_postdata();
       <!-- Image block -->
       <div class="w-full flex justify-center md:justify-end">
         <div
-          class="bg-white rounded-[20px] shadow-sm overflow-hidden w-[300px] md:w-[350px] lg:w-[500px] xl:w-[620px] w-full">
-          <img
-            src="<?php echo $image_3; ?>"
-            alt="<?php echo $title_3; ?>"
-            class="w-full h-auto aspect-[1.17]" />
+          class="group bg-white rounded-[20px] shadow-sm overflow-hidden w-[300px] md:w-[350px] lg:w-[500px] xl:w-[620px] w-full shadow-xl relative">
+          <div class="relative w-full">
+            <img
+              id="image-03"
+              src="<?php echo $image_3; ?>"
+              alt="<?php echo $title_3; ?>"
+              class="w-full h-auto transition-opacity duration-500 aspect-[1.17]" />
+            <!-- Mobile play button on image -->
+            <button
+              id="mobile-play-btn-03"
+              class="md:hidden absolute inset-0 flex items-center justify-center bg-black/30 rounded-[20px] transition-opacity duration-300"
+              aria-label="Play video">
+              <svg
+                class="w-16 h-16 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </button>
+          </div>
+          <div
+            id="video-container-03"
+            class="absolute inset-0 opacity-0 pointer-events-none transition-opacity duration-500">
+            <video
+              id="fast-video-03"
+              src="<?php echo $video_3; ?>"
+              alt="<?php echo $title_3; ?>"
+              class="w-full aspect-[1.17]"
+              loop></video>
+            <!-- Play button on video center -->
+            <button
+              id="video-play-btn-03"
+              class="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity duration-300"
+              aria-label="Play video">
+              <svg
+                class="w-16 h-16 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -353,6 +390,11 @@ wp_reset_postdata();
         class="text-[14px] lg:text-[15px] xl:text-[16px] font-medium text-start md:text-center leading-6">
         住まいを起点に、人・動物・地域が調和する未来型賃貸住宅を実現し、地域に新しいライフスタイルと価値を提供していきます。
       </p>
+    </div>
+    <div class="flex justify-center">
+      <a href="<?php echo home_url('/business'); ?>" class="flex items-center justify-center lg:w-[300px] xl:w-[430px] rounded-[20px] bg-[#28A8E0] hover:bg-[#5ec6f8] px-8 md:px-10 lg:px-12 xl:px-14 py-2 md:py-3 lg:py-4 xl:py-5 text-white font-bold text-[12px] md:text-[14px] lg:text-[15px] xl:text-[16px] transition-colors duration-150 aos-init aos-animate" data-aos="fade-in" data-aos-delay="200">
+        事業内容を詳しく見る
+      </a>
     </div>
   </div>
 </section>

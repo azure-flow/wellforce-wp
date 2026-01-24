@@ -385,6 +385,7 @@ get_header();
   if ($query->have_posts()) {
     $query->the_post();
     $current_figure = get_field('current_figure');
+    $concept_comment = get_field('concept_comment');
   }
   wp_reset_postdata();
   ?>>
@@ -395,6 +396,10 @@ get_header();
         class="text-[20px] md:text-[27px] lg:text-[40px] font-bold text-center w-full leading-tight whitespace-nowrap">
         東大阪市のウェルビーイング現在値
       </h2>
+      <p
+        class="text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px] text-black w-full text-start md:text-center mb-3">
+        <?php echo $concept_comment; ?>
+      </p>
     </div>
     <div
       class="w-full flex flex-col flex-1 rounded-[20px] overflow-hidden justify-center items-start hover:opacity-80 hover:shadow-lg duration-200"

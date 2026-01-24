@@ -1,6 +1,6 @@
     <?php
     get_header();
-    $post_title = get_the_title();
+    $post_title = get_field('title');
     $post_description = get_the_excerpt();
     $post_date = get_the_date('Y.m.d');
     $post_content = get_field('description');

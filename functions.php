@@ -36,7 +36,8 @@ function wellforce_enqueue_scripts()
 add_action('wp_enqueue_scripts', 'wellforce_enqueue_scripts');
 
 // AJAX handler for loading more news posts
-function ajax_load_more_news() {
+function ajax_load_more_news()
+{
   $posts_per_page = 5;
   $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
   $offset = ($paged - 1) * $posts_per_page;
@@ -48,14 +49,14 @@ function ajax_load_more_news() {
     'orderby' => 'date',
     'order' => 'DESC'
   ));
-  
+
   ob_start();
-  if ( $news_query->have_posts() ) :
+  if ($news_query->have_posts()) :
     while ($news_query->have_posts()) : $news_query->the_post();
       $post_title = get_the_title();
       $post_date = get_the_date('Y.m.d');
       $post_content = get_field('description');
-      ?>
+?>
       <a href="<?php echo get_the_permalink(); ?>" class="news-item w-full max-w-[1000px] rounded-[20px] bg-[#EAF8FF] px-8 py-6 flex flex-col gap-1 md:gap-1 lg:gap-1 xl:gap-2 shadow-sm hover:bg-[#e0f6ff] hover:shadow-md duration-150 cursor-pointer" data-aos="fade-in" data-aos-delay="100">
         <div class="w-full flex justify-start mb-1">
           <span class="text-black text-[8px] md:text-[9px] lg:text-[10px] xl:text-[12px] py-[3px] px-[9px] rounded-[10px] border border-[#9F9F9F]"><?php echo $post_date; ?></span>
@@ -69,8 +70,8 @@ function ajax_load_more_news() {
           <?php echo esc_html($post_content); ?>
         </p>
       </a>
-      <?php
-    endwhile; 
+<?php
+    endwhile;
     wp_reset_postdata();
   endif;
   $output = ob_get_clean();
@@ -86,26 +87,27 @@ add_action('wp_ajax_nopriv_load_more_news', 'ajax_load_more_news');
  * Works with both plain text and HTML (preserves <br> tags from nl2br)
  */
 if (!function_exists('linkify_text')) {
-  function linkify_text($text) {
+  function linkify_text($text)
+  {
     if (empty($text)) return '';
-    
+
     // URL regex pattern (matches http://, https://, and www.)
     // Excludes URLs that are already inside <a> tags
     $url_pattern = '/(?<!["\'>])(https?:\/\/[^\s<>]+|www\.[^\s<>]+)(?![^<]*<\/a>)/i';
-    
+
     // Replace URLs with clickable links
-    $text = preg_replace_callback($url_pattern, function($matches) {
+    $text = preg_replace_callback($url_pattern, function ($matches) {
       $url = trim($matches[0]);
       $display_url = $url;
-      
+
       // Add http:// if it starts with www.
       if (preg_match('/^www\./i', $url)) {
         $url = 'http://' . $url;
       }
-      
+
       return '<a href="' . esc_url($url) . '" target="_blank" rel="noopener noreferrer" class="text-[#28A8E0] hover:underline">' . esc_html($display_url) . '</a>';
     }, $text);
-    
+
     return $text;
   }
 }
@@ -115,82 +117,90 @@ if (!function_exists('linkify_text')) {
 
 add_action('init', 'wellforce_handle_contact_form');
 
-function wellforce_handle_contact_form() {
+function wellforce_handle_contact_form()
+{
 
-    if (!isset($_POST['contact_form'])) {
-        return;
-    }
+  if (!isset($_POST['contact_form'])) {
+    return;
+  }
 
-    global $wellforce_errors, $wellforce_old;
-    $wellforce_errors = [];
-    $wellforce_old = [];
+  global $wellforce_errors, $wellforce_old;
+  $wellforce_errors = [];
+  $wellforce_old = [];
 
-    // Nonce check
-    if (!wp_verify_nonce($_POST['_wpnonce'], 'wellforce_contact')) {
-        $wellforce_errors['form'] = '不正な送信です。';
-        return;
-    }
+  // Nonce check
+  if (!wp_verify_nonce($_POST['_wpnonce'], 'wellforce_contact')) {
+    $wellforce_errors['form'] = '不正な送信です。';
+    return;
+  }
 
-    // Get values
-    $first = trim($_POST['firstName'] ?? '');
-    $last  = trim($_POST['lastName'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $phone = trim($_POST['phone'] ?? '');
-    $msg   = trim($_POST['message'] ?? '');
+  // Get values
+  $first = trim($_POST['firstName'] ?? '');
+  $last  = trim($_POST['lastName'] ?? '');
+  $email = trim($_POST['email'] ?? '');
+  $phone = trim($_POST['phone'] ?? '');
+  $msg   = trim($_POST['message'] ?? '');
 
-    // Preserve old values
-    $wellforce_old = compact('first', 'last', 'email', 'phone', 'msg');
+  // Preserve old values
+  $wellforce_old = compact('first', 'last', 'email', 'phone', 'msg');
 
-    // Validation
-    if ($first === '') {
-        $wellforce_errors['firstName'] = '姓は必須です';
-    }
+  // Validation
+  if ($first === '') {
+    $wellforce_errors['firstName'] = '姓は必須です';
+  }
 
-    if ($last === '') {
-        $wellforce_errors['lastName'] = '名は必須です';
-    }
+  if ($last === '') {
+    $wellforce_errors['lastName'] = '名は必須です';
+  }
 
-    if ($email === '') {
-        $wellforce_errors['email'] = 'メールアドレスは必須です';
-    } elseif (!is_email($email)) {
-        $wellforce_errors['email'] = 'メールアドレスの形式が正しくありません';
-    }
+  if ($email === '') {
+    $wellforce_errors['email'] = 'メールアドレスは必須です';
+  } elseif (!is_email($email)) {
+    $wellforce_errors['email'] = 'メールアドレスの形式が正しくありません';
+  }
 
-    if ($phone === '') {
-        $wellforce_errors['phone'] = '電話番号は必須です';
-    }
+  if ($phone === '') {
+    $wellforce_errors['phone'] = '電話番号は必須です';
+  }
 
-    if ($msg === '') {
-        $wellforce_errors['message'] = 'メッセージは必須です';
-    }
+  if ($msg === '') {
+    $wellforce_errors['message'] = 'メッセージは必須です';
+  }
 
-    // If errors exist → stop here
-    if (!empty($wellforce_errors)) {
-        return;
-    }
+  // If errors exist → stop here
+  if (!empty($wellforce_errors)) {
+    return;
+  }
 
-    // Sanitize (after validation)
-    $first = sanitize_text_field($first);
-    $last  = sanitize_text_field($last);
-    $email = sanitize_email($email);
-    $phone = sanitize_text_field($phone);
-    $msg   = sanitize_textarea_field($msg);
+  // Sanitize (after validation)
+  $first = sanitize_text_field($first);
+  $last  = sanitize_text_field($last);
+  $email = sanitize_email($email);
+  $phone = sanitize_text_field($phone);
+  $msg   = sanitize_textarea_field($msg);
 
-    // Send mail
-    wp_mail(
-        'bz3323766@gmail.com',
-        '【お問い合わせ】Webサイトより',
-        "
-        お名前：{$last} {$first}
-        メール：{$email}
-        電話番号：{$phone}
+  // Send mail with customized HTML email UI
+  $to = 'contact@wellforce.jp';
+  $subject = '【お問い合わせ】Webサイトより';
 
-        内容：
-        {$msg}
-        "
-    );
+  $message = "【お問い合わせフォーム送信内容】
 
-    // Redirect (success)
-    wp_redirect(add_query_arg('sent', '1', wp_get_referer()));
-    exit;
+  お名前：{$last} {$first}
+  メール：{$email}
+  電話番号：{$phone}
+
+  内容：
+  {$msg}";
+
+  $headers = [
+    'Content-Type: text/plain; charset=UTF-8',
+    'From: 株式会社ウエルフォース <info@wellforce.jp>',
+    'Reply-To: ' . $email,
+  ];
+
+  wp_mail($to, $subject, $message, $headers);
+
+  // Redirect (success)
+  wp_redirect(add_query_arg('sent', '1', wp_get_referer()));
+  exit;
 }

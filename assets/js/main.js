@@ -285,9 +285,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const isMobile = window.innerWidth < 768;
 
     // Set video playback rate
-    video.playbackRate = 5.0;
+    video.playbackRate = 1.0;
     video.addEventListener("play", () => {
-      video.playbackRate = 5.0;
+      video.playbackRate = 1.0;
     });
 
     // Function to show video with fade
@@ -425,6 +425,14 @@ document.addEventListener("DOMContentLoaded", function () {
     "video-container-02",
     "video-play-btn-02",
     "mobile-play-btn-02"
+  );
+
+  setupVideoImageInteraction(
+    "fast-video-03",
+    "image-03",
+    "video-container-03",
+    "video-play-btn-03",
+    "mobile-play-btn-03"
   );
 
 
