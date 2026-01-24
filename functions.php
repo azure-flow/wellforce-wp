@@ -79,3 +79,118 @@ function ajax_load_more_news() {
 }
 add_action('wp_ajax_load_more_news', 'ajax_load_more_news');
 add_action('wp_ajax_nopriv_load_more_news', 'ajax_load_more_news');
+
+
+/**
+ * Convert URLs in text to clickable links
+ * Works with both plain text and HTML (preserves <br> tags from nl2br)
+ */
+if (!function_exists('linkify_text')) {
+  function linkify_text($text) {
+    if (empty($text)) return '';
+    
+    // URL regex pattern (matches http://, https://, and www.)
+    // Excludes URLs that are already inside <a> tags
+    $url_pattern = '/(?<!["\'>])(https?:\/\/[^\s<>]+|www\.[^\s<>]+)(?![^<]*<\/a>)/i';
+    
+    // Replace URLs with clickable links
+    $text = preg_replace_callback($url_pattern, function($matches) {
+      $url = trim($matches[0]);
+      $display_url = $url;
+      
+      // Add http:// if it starts with www.
+      if (preg_match('/^www\./i', $url)) {
+        $url = 'http://' . $url;
+      }
+      
+      return '<a href="' . esc_url($url) . '" target="_blank" rel="noopener noreferrer" class="text-[#28A8E0] hover:underline">' . esc_html($display_url) . '</a>';
+    }, $text);
+    
+    return $text;
+  }
+}
+
+// Contact Form Handler
+
+
+add_action('init', 'wellforce_handle_contact_form');
+
+function wellforce_handle_contact_form() {
+
+    if (!isset($_POST['contact_form'])) {
+        return;
+    }
+
+    global $wellforce_errors, $wellforce_old;
+    $wellforce_errors = [];
+    $wellforce_old = [];
+
+    // Nonce check
+    if (!wp_verify_nonce($_POST['_wpnonce'], 'wellforce_contact')) {
+        $wellforce_errors['form'] = '不正な送信です。';
+        return;
+    }
+
+    // Get values
+    $first = trim($_POST['firstName'] ?? '');
+    $last  = trim($_POST['lastName'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $phone = trim($_POST['phone'] ?? '');
+    $msg   = trim($_POST['message'] ?? '');
+
+    // Preserve old values
+    $wellforce_old = compact('first', 'last', 'email', 'phone', 'msg');
+
+    // Validation
+    if ($first === '') {
+        $wellforce_errors['firstName'] = '姓は必須です';
+    }
+
+    if ($last === '') {
+        $wellforce_errors['lastName'] = '名は必須です';
+    }
+
+    if ($email === '') {
+        $wellforce_errors['email'] = 'メールアドレスは必須です';
+    } elseif (!is_email($email)) {
+        $wellforce_errors['email'] = 'メールアドレスの形式が正しくありません';
+    }
+
+    if ($phone === '') {
+        $wellforce_errors['phone'] = '電話番号は必須です';
+    }
+
+    if ($msg === '') {
+        $wellforce_errors['message'] = 'メッセージは必須です';
+    }
+
+    // If errors exist → stop here
+    if (!empty($wellforce_errors)) {
+        return;
+    }
+
+    // Sanitize (after validation)
+    $first = sanitize_text_field($first);
+    $last  = sanitize_text_field($last);
+    $email = sanitize_email($email);
+    $phone = sanitize_text_field($phone);
+    $msg   = sanitize_textarea_field($msg);
+
+    // Send mail
+    wp_mail(
+        'bz3323766@gmail.com',
+        '【お問い合わせ】Webサイトより',
+        "
+        お名前：{$last} {$first}
+        メール：{$email}
+        電話番号：{$phone}
+
+        内容：
+        {$msg}
+        "
+    );
+
+    // Redirect (success)
+    wp_redirect(add_query_arg('sent', '1', wp_get_referer()));
+    exit;
+}

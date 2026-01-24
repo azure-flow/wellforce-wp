@@ -369,7 +369,25 @@ get_header();
 </section>
 
 <section
-  class="w-full flex justify-center items-center py-20 md:py-24 lg:py-28 lg:py-32 bg-[#fff]">
+  class="w-full flex justify-center items-center py-20 md:py-24 lg:py-28 lg:py-32 bg-[#fff]"
+
+  <?php
+  $args = array(
+    'post_type'      => 'homepage-cms',
+    'posts_per_page' => 1,
+    'orderby'        => 'date',
+    'order'          => 'ASC'
+  );
+
+  $query = new WP_Query($args);
+
+  $first_homepage_cms_date = null;
+  if ($query->have_posts()) {
+    $query->the_post();
+    $current_figure = get_field('current_figure');
+  }
+  wp_reset_postdata();
+  ?>>
   <div
     class="w-full max-w-[310px] md:max-w-[560px] lg:max-w-[800px] xl:max-w-[1100px] mx-auto flex flex-col justify-center items-center gap-8 md:gap-12 lg:gap-14 xl:gap-16">
     <div class="flex flex-col items-center gap-6">
@@ -384,7 +402,7 @@ get_header();
       data-aos-delay="200">
       <a href="https://well-being.digital.go.jp/dashboard" target="_blank">
         <img
-          src="<?php echo get_template_directory_uri(); ?>/assets/images/chart.webp"
+          src="<?php echo esc_url($current_figure); ?>"
           alt="東大阪市のウェルビーイング現在値"
           class="w-full h-auto" />
       </a>

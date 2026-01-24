@@ -3,6 +3,13 @@
 get_header();
 ?>
 
+<?php
+global $wellforce_errors, $wellforce_old;
+$wellforce_errors = $wellforce_errors ?? [];
+$wellforce_old = $wellforce_old ?? [];
+?>
+
+
 <section
   id="hero-section"
   class="w-full h-[400px] md:h-[360px] lg:h-[500px] xl:h-[530px] bg-gradient-to-b from-[#A4D3E8] to-[#28A8E0] flex items-center justify-center">
@@ -42,7 +49,15 @@ get_header();
     <!-- Contact Form -->
     <div
       class="w-full md:w-full lg:w-[800px] xl:w-[860px] bg-[#F5FCFF] rounded-[20px] py-8 md:py-8 lg:py-10 xl:py-12 px-6 md:px-12 lg:px-12 xl:px-20 shadow-none">
-      <form class="w-full flex flex-col gap-3" autocomplete="off">
+      <?php if (isset($_GET['sent'])): ?>
+        <div class="mb-4 p-3 text-green-700 bg-green-100 rounded">
+          お問い合わせを送信しました。ありがとうございます。
+        </div>
+      <?php endif; ?>
+
+      <form method="post" action="" class="w-full flex flex-col gap-3" autocomplete="off">
+        <input type="hidden" name="contact_form" value="1">
+        <input type="hidden" name="_wpnonce" value="<?php echo wp_create_nonce('wellforce_contact'); ?>">
         <div
           class="text-[15px] md:text-[16px] lg:text-[18px] xl:text-[20px] font-medium mb-4 text-black">
           お問い合わせフォーム
@@ -58,7 +73,14 @@ get_header();
               name="firstName"
               class="w-full border border-gray-200 rounded-[10px] px-3 py-2 text-[13px] md:text-[15px] bg-white focus:ring-2 focus:ring-[#B7DFF5] outline-none"
               placeholder="山田"
+              value="<?php echo esc_attr($wellforce_old['first'] ?? ''); ?>"
               autocomplete="off" />
+            <?php if (!empty($wellforce_errors['firstName'])): ?>
+              <span class="pl-1 text-[#ff3d00] text-[12px] lg:text-[14px]">
+                <?php echo esc_html($wellforce_errors['firstName']); ?>
+              </span>
+            <?php endif; ?>
+
           </div>
           <div class="w-full">
             <label
@@ -70,7 +92,14 @@ get_header();
               name="lastName"
               class="w-full border border-gray-200 rounded-[10px] px-3 py-2 text-[13px] md:text-[15px] bg-white focus:ring-2 focus:ring-[#B7DFF5] outline-none"
               placeholder="太郎"
+              value="<?php echo esc_attr($wellforce_old['last'] ?? ''); ?>"
               autocomplete="off" />
+            <?php if (!empty($wellforce_errors['lastName'])): ?>
+              <span class="pl-1 text-[#ff3d00] text-[12px] lg:text-[14px]">
+                <?php echo esc_html($wellforce_errors['lastName']); ?>
+              </span>
+            <?php endif; ?>
+
           </div>
         </div>
         <div class="flex flex-col md:flex-row gap-3 mb-2">
@@ -84,7 +113,14 @@ get_header();
               name="email"
               class="w-full border border-gray-200 rounded-[10px] px-3 py-2 text-[13px] md:text-[15px] bg-white focus:ring-2 focus:ring-[#B7DFF5] outline-none"
               placeholder="example@email.com"
+              value="<?php echo esc_attr($wellforce_old['email'] ?? ''); ?>"
               autocomplete="off" />
+            <?php if (!empty($wellforce_errors['email'])): ?>
+              <span class="pl-1 text-[#ff3d00] text-[12px] lg:text-[14px]">
+                <?php echo esc_html($wellforce_errors['email']); ?>
+              </span>
+            <?php endif; ?>
+
           </div>
           <div class="w-full">
             <label
@@ -96,7 +132,14 @@ get_header();
               name="phone"
               class="w-full border border-gray-200 rounded-[10px] px-3 py-2 text-[13px] md:text-[15px] bg-white focus:ring-2 focus:ring-[#B7DFF5] outline-none"
               placeholder="090-1234-5678"
+              value="<?php echo esc_attr($wellforce_old['phone'] ?? ''); ?>"
               autocomplete="off" />
+            <?php if (!empty($wellforce_errors['phone'])): ?>
+              <span class="pl-1 text-[#ff3d00] text-[12px] lg:text-[14px]">
+                <?php echo esc_html($wellforce_errors['phone']); ?>
+              </span>
+            <?php endif; ?>
+
           </div>
         </div>
         <div class="flex flex-col md:flex-row gap-3 mb-2">
@@ -110,7 +153,14 @@ get_header();
               class="w-full border border-gray-200 rounded-[10px] px-3 py-2 text-[13px] md:text-[15px] bg-white focus:ring-2 focus:ring-[#B7DFF5] outline-none resize-none"
               rows="12"
               resize="none"
-              placeholder="お問い合わせ内容をご記入ください"></textarea>
+              placeholder="お問い合わせ内容をご記入ください">
+              <?php echo esc_textarea($wellforce_old['msg'] ?? ''); ?>
+            </textarea>
+            <?php if (!empty($wellforce_errors['message'])): ?>
+              <span class="pl-1 text-[#ff3d00] text-[12px] lg:text-[14px]">
+                <?php echo esc_html($wellforce_errors['message']); ?>
+              </span>
+            <?php endif; ?>
           </div>
         </div>
         <div class="w-full flex justify-center">

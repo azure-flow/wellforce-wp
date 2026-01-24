@@ -3,31 +3,59 @@
 get_header();
 
 $args = array(
-    'post_type'      => 'homepage-cms',
-    'posts_per_page' => 1,
-    'orderby'        => 'date',
-    'order'          => 'ASC'
+  'post_type'      => 'homepage-cms',
+  'posts_per_page' => 1,
+  'orderby'        => 'date',
+  'order'          => 'ASC'
 );
 
 $query = new WP_Query($args);
 
-$company_name    = '';
-$company_address = '';
+$company_name      = '';
+$company_address   = '';
 $business_purpose  = '';
-$company_capital = '';
-$company_social  = '';
-$company_birth   = '';
-$homepage_url    = '';
+$company_capital   = '';
+$company_social    = '';
+$company_birth     = '';
+$homepage_url      = '';
+$homepage_history  = '';
+
+// New: For extra values (from reference image)
+$image_1   = '';
+$video_1   = '';
+$title_1   = '';
+$content_1 = '';
+$image_2   = '';
+$video_2   = '';
+$title_2   = '';
+$content_2 = '';
+$image_3   = '';
+$title_3   = '';
+$content_3 = '';
 
 if ($query->have_posts()) {
-    $query->the_post();
-    $company_name    = get_field('company_name');
-    $company_address = get_field('company_address');
-    $business_purpose  = get_field('business_purpose');
-    $company_capital = get_field('company_capital');
-    $company_social  = get_field('company_social');
-    $company_birth   = get_field('company_birth');
-    $homepage_url    = get_field('homepage_url');
+  $query->the_post();
+  $company_name      = get_field('company_name');
+  $company_address   = get_field('company_address');
+  $business_purpose  = get_field('business_purpose');
+  $company_capital   = get_field('company_capital');
+  $company_social    = get_field('company_social');
+  $company_birth     = get_field('company_birth');
+  $homepage_url      = get_field('homepage_url');
+  $homepage_history  = get_field('homepage_history');
+
+  // Get extra values as well
+  $image_1   = get_field('image_1');
+  $video_1   = get_field('video_1');
+  $title_1   = get_field('title_1');
+  $content_1 = get_field('content_1');
+  $image_2   = get_field('image_2');
+  $video_2   = get_field('video_2');
+  $title_2   = get_field('title_2');
+  $content_2 = get_field('content_2');
+  $image_3   = get_field('image_3');
+  $title_3   = get_field('title_3');
+  $content_3 = get_field('content_3');
 }
 wp_reset_postdata();
 ?>
@@ -102,6 +130,15 @@ wp_reset_postdata();
           <a href="<?php echo $homepage_url; ?>" target="_blank"><?php echo $homepage_url; ?></a>
         </div>
       </div>
+      <div
+        class="flex flex-col md:flex-row gap-1 md:gap-0 border-b border-b-[.5px] py-3 md:py-5 lg:py-6 xl:py-8 px-[27px] md:pl-[44px] lg:pl-[56px] xl:pl-[72px] border-black text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px]">
+        <div class="md:w-[126px] lg:w-[148px] xl:w-[170px]">
+          沿革
+        </div>
+        <div class="">
+          <span><?php echo $homepage_history; ?></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -125,29 +162,19 @@ wp_reset_postdata();
         class="w-full flex flex-col items-start justify-center gap-4 lg:gap-[20px] xl:gap-[30px] mb-6 md:mb-0">
         <h3
           class="text-[16px] md:text-[18px] lg:text-[20px] xl:text-[24px] font-semibold text-black mb-5 md:mb-2 lg:mb-3 xl:mb-4">
-          賃貸住宅の経営・運営
+          <?php echo $title_1; ?>
         </h3>
         <p
-          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed font-medium">
-          ― 高品質な住まいを通じた、<br
-            class="block md:hidden" />安心と快適の提供 ―
-        </p>
-        <p
-          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed">
-          株式会社ウエルフォースは、東大阪市・八戸ノ里地域において、<br />
-          積水ハウス様・パナソニックホームズ様が手がける高性能賃貸住宅の経営・運営を行っています。
-        </p>
-        <p
-          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed">
-          軽量鉄骨造2階建てアパートを中心に、<br />
-          耐震性・断熱性・遮音性といった住宅性能はもちろん、<br />
-          長期的に安心して暮らせる住環境づくりを重視してきました。
-        </p>
-        <p
-          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed">
-          33年以上にわたる賃貸経営の実績を活かし、<br />
-          単に「住む場所」を提供するのではなく、<br />
-          地域に根ざし、入居者の暮らしに寄り添うプロパティマネジメントを行っています。
+          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed font-regular">
+          <?php
+          $lines = explode("\n", $content_1);
+          if (!empty($lines)) {
+            echo '<span class="font-bold">' . esc_html(array_shift($lines)) . '</span>';
+            if (!empty($lines)) {
+              echo '<br>' . nl2br(esc_html(implode("\n", $lines)));
+            }
+          }
+          ?>
         </p>
       </div>
       <!-- Image block -->
@@ -157,9 +184,9 @@ wp_reset_postdata();
           <div class="relative w-full">
             <img
               id="image-01"
-              src="<?php echo get_template_directory_uri(); ?>/assets/images/bis01.webp"
-              alt="賃貸住宅の外観と入居者イメージ"
-              class="w-full h-auto transition-opacity duration-500" />
+              src="<?php echo $image_1; ?>"
+              alt="<?php echo $title_1; ?>"
+              class="w-full h-auto transition-opacity duration-500 aspect-[1.17]" />
             <!-- Mobile play button on image -->
             <button
               id="mobile-play-btn-01"
@@ -178,7 +205,7 @@ wp_reset_postdata();
             class="absolute inset-0 opacity-0 pointer-events-none transition-opacity duration-500">
             <video
               id="fast-video-01"
-              src="<?php echo get_template_directory_uri(); ?>/assets/videos/生成AIコミュニティ.mp4"
+              src="<?php echo $video_1; ?>"
               alt="賃貸住宅の外観と入居者イメージ"
               class="w-full aspect-[1.17]"
               muted
@@ -217,9 +244,9 @@ wp_reset_postdata();
           <div class="relative w-full">
             <img
               id="image-02"
-              src="<?php echo get_template_directory_uri(); ?>/assets/images/bis02.webp"
-              alt="賃貸住宅の外観と入居者イメージ"
-              class="w-full h-auto transition-opacity duration-500" />
+              src="<?php echo $image_2; ?>"
+              alt="<?php echo $title_2; ?>"
+              class="w-full h-auto transition-opacity duration-500 aspect-[1.17]" />
             <!-- Mobile play button on image -->
             <button
               id="mobile-play-btn-02"
@@ -238,7 +265,7 @@ wp_reset_postdata();
             class="absolute inset-0 opacity-0 pointer-events-none transition-opacity duration-500">
             <video
               id="fast-video-02"
-              src="<?php echo get_template_directory_uri(); ?>/assets/videos/猫と暮らす未来型賃貸住宅.mp4"
+              src="<?php echo $video_2; ?>"
               alt="賃貸住宅の外観と入居者イメージ"
               class="w-full aspect-[1.17]"
               muted
@@ -263,34 +290,19 @@ wp_reset_postdata();
         class="w-full flex flex-col items-start justify-center gap-4 lg:gap-[20px] xl:gap-[30px] mb-6 md:mb-0">
         <h3
           class="text-[16px] md:text-[18px] lg:text-[20px] xl:text-[24px] font-semibold text-black mb-5 md:mb-2 lg:mb-3 xl:mb-4">
-          生成AIコミュニティの運営
+          <?php echo $title_2; ?>
         </h3>
         <p
-          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed font-medium">
-          ― 生成AIデジタル・コミュニティによる、<br
-            class="block md:hidden" />新しいつながりの創出 ―
-        </p>
-        <p
-          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed">
-          ウエルフォースは、住まいを軸にした次のステップとして、
-          地域コミュニティの活性化に取り組んでいます。
-        </p>
-        <p
-          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed">
-          その中心となるのが、<br />
-          「生成AIデジタル・コミュニティ」の開発・運営です。
-        </p>
-        <p
-          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed">
-          生成AIを「難しい技術」ではなく、<br />
-          誰もが楽しみながら触れ、学び、つながれるツールとして捉え、<br />
-          デジタルリテラシー向上を目的とした交流の場を提供します。
-        </p>
-        <p
-          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed">
-          ・生成AIで遊ぶ、試す、学ぶ<br />
-          ・世代や職業を超えた交流<br />
-          ・地域の中に新しい価値と会話を生み出す
+          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed font-regular">
+          <?php
+          $lines = explode("\n", $content_2);
+          if (!empty($lines)) {
+            echo '<span class="font-bold">' . esc_html(array_shift($lines)) . '</span>';
+            if (!empty($lines)) {
+              echo '<br>' . nl2br(esc_html(implode("\n", $lines)));
+            }
+          }
+          ?>
         </p>
       </div>
     </div>
@@ -310,30 +322,19 @@ wp_reset_postdata();
         class="w-full flex flex-col items-start justify-center gap-4 lg:gap-[20px] xl:gap-[30px] mb-6 md:mb-0">
         <h3
           class="text-[16px] md:text-[18px] lg:text-[20px] xl:text-[24px] font-semibold text-black mb-5 md:mb-2 lg:mb-3 xl:mb-4">
-          未来型賃貸住宅の開発・運営
+          <?php echo $title_3; ?>
         </h3>
         <p
-          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed font-medium">
-          ― 猫と人が共に幸せに暮らす、<br
-            class="block md:hidden" />新しい住まいのかたち ―
-        </p>
-        <p
-          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed">
-          ウエルフォースが描く未来の住まいは、
-          人だけでなく、大切な存在である「猫」との共生を前提とした賃貸住宅です。
-        </p>
-        <p
-          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed">
-          「猫と暮らす賃貸住宅（猫専用アパート）」の建築・運営を通じて、
-          <br />
-          猫の習性や安全性に配慮した設計、<br />
-          入居者同士が価値観を共有できるコミュニティ形成を行います。
-        </p>
-        <p
-          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed">
-          ・猫にも人にもストレスの少ない住環境<br />
-          ・ペット可ではなく「共生」を前提とした設計思想<br />
-          ・住む人同士がつながる、温かなコミュニティ
+          class="text-[14px] md:text-[12px] lg:text-[15px] xl:text-[16px] text-black leading-[1.8] md:leading-relaxed font-regular">
+          <?php
+          $lines = explode("\n", $content_3);
+          if (!empty($lines)) {
+            echo '<span class="font-bold">' . esc_html(array_shift($lines)) . '</span>';
+            if (!empty($lines)) {
+              echo '<br>' . nl2br(esc_html(implode("\n", $lines)));
+            }
+          }
+          ?>
         </p>
       </div>
       <!-- Image block -->
@@ -341,9 +342,9 @@ wp_reset_postdata();
         <div
           class="bg-white rounded-[20px] shadow-sm overflow-hidden w-[300px] md:w-[350px] lg:w-[500px] xl:w-[620px] w-full">
           <img
-            src="<?php echo get_template_directory_uri(); ?>/assets/images/bis03.webp"
-            alt="賃貸住宅の外観と入居者イメージ"
-            class="w-full h-auto" />
+            src="<?php echo $image_3; ?>"
+            alt="<?php echo $title_3; ?>"
+            class="w-full h-auto aspect-[1.17]" />
         </div>
       </div>
     </div>
